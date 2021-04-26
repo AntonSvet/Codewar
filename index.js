@@ -15,7 +15,8 @@ console.log(maskify('')) //'#1111');
 
 //// #109 Array.diff
 function arrayDiff(a, b) {
-  return a.filter((item) => b.includes(item))
+  return a.filter((item) => !b.includes(item))
+  //return a.filter((item) => b.indexOf(item) === -1)
 }
 
 // ;[9, 2, 1, 3].indexOf(1) // 2

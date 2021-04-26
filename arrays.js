@@ -76,7 +76,7 @@ function getCount(str) {
 
 console.log(getCount('abracadabra')) //, 5)
 
-// #107 Playing with digits
+// #107 Playing with digits //no result
 
 function digPow(n, p) {}
 
@@ -92,7 +92,15 @@ digPow(46288, 3) //should return 51 since 4³ + 6⁴+ 2⁵ + 8⁶ + 8⁷ = 23606
 //#108   Smallest value of an array
 
 function min(arr, toReturn) {
-  // TODO
+  let value = arr[0]
+  let index = 0
+  for (let i = 0; i < arr.length; i++) {
+    if (value > arr[i]) {
+      index = i
+      value = arr[i]
+    }
+  }
+  return toReturn === 'value' ? value : index
 }
 
 console.log(min([1, 2, 3, 4, 5], 'value')) //, 1)
@@ -100,23 +108,72 @@ console.log(min([1, 2, 3, 4, 5], 'index')) //, 0)
 
 //// #109 Array.diff
 function arrayDiff(a, b) {
-  return a.filter((item) => b.includes(item))
+  return a.filter((item) => !b.includes(item))
+  //return a.filter((item) => b.indexOf(item) === -1)
 }
 
 // ;[9, 2, 1, 3].indexOf(1) // 2
 // ;[9, 2, 1, 3].includes(1) // true
 
-// console.log(arrayDiff([], [4, 5])) //, [], 'a was [], b was [4,5]')
-// console.log(arrayDiff([3, 4], [3])) //, [4], 'a was [3,4], b was [3]')
-// console.log(arrayDiff([1, 8, 2], [])) //, [1, 8, 2], 'a was [1,8,2], b was []')
-// console.log(arrayDiff([1, 2, 3], [1, 2])) //, [3], 'a was [1,2,3], b was [1,2]')
+console.log(arrayDiff([3, 4], [3])) //, [4], 'a was [3,4], b was [3]')
+console.log(arrayDiff([1, 2, 3], [1, 2])) //, [3], 'a was [1,2,3], b was [1,2]')
 
 // #110 Find the capitals
-var capitals = function (word) {
-  // Write your code here
+const capitals = function (word) {
+  const letters = word.split('')
+  const index = []
+  for (let i = 0; i < letters.length; i++) {
+    if (letters[i] === letters[i].toUpperCase()) {
+      index.push(i)
+    }
+  }
+  return index
 }
 
 console.log(capitals('CodEWaRs')) // , [0,3,4,6] );
+
+// #111  Insert dashes
+
+function insertDash(num) {
+  const numArr = num.toString().split('')
+  const dashArr = []
+  for (let i = 0; i < numArr.length; i++) {
+    dashArr.push(numArr[i])
+    if (numArr[i] % 2 === 1 && numArr[i + 1] % 2 === 1) {
+      dashArr.push('-')
+    }
+  }
+  return dashArr.join('')
+}
+console.log(insertDash(454793)) //,'4547-9-3');
+console.log(insertDash(123456)) //,'123456');
+console.log(insertDash(1003567)) //,'1003-567');
+
+////#112  Count the smiley faces!
+
+function countSmileys(arr) {
+  const smiles = [
+    ':D',
+    ';D',
+    ';)',
+    ':)',
+    ':-D',
+    ';-D',
+    ';-)',
+    ':-)',
+    ':~D',
+    ';~D',
+    ';~)',
+    ':~)',
+  ]
+  const newArr = arr.filter((smile) => smiles.includes(smile))
+  return newArr.length
+}
+
+console.log(countSmileys([])) //, 0)
+console.log(countSmileys([':D', ':~)', ';~D', ':)'])) //, 4)
+console.log(countSmileys([':)', ':(', ':D', ':O', ':;'])) //, 2)
+console.log(countSmileys([';]', ':[', ';*', ':$', ';-D'])) //, 1)
 
 //// №113 Homogenous arrays
 
@@ -144,3 +201,6 @@ console.log(filterHomogenous([[1, 5, 4], ['a', 3, 5], ['b'], [], ['1', 2, 3]])) 
 console.log(
   filterHomogenous([[123, 234, 432], ['', 'abc'], [''], ['', 1], ['', '1'], []])
 ) ///, [[123, 234, 432], ['', 'abc'], [''], ['', '1']]);
+
+// #114  Lottery Ticket
+function bingo(ticket, win) {}
