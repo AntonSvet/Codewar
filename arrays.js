@@ -203,4 +203,118 @@ console.log(
 ) ///, [[123, 234, 432], ['', 'abc'], [''], ['', '1']]);
 
 // #114  Lottery Ticket
-function bingo(ticket, win) {}
+function bingo(ticket, win) {
+  const [a, b, c] = ticket
+  let counter = 0
+  const tic = ticket.map((item) => {
+    for (let i = 0; i < item.length; i++) {
+      if (item[0].charCodeAt(i) === item[1]) {
+        return counter++
+      }
+    }
+  })
+  return counter >= win ? 'Winner!' : 'Loser!'
+}
+console.log(
+  bingo(
+    [
+      ['ABC', 65],
+      ['HGR', 74],
+      ['BYHT', 74],
+    ],
+    2
+  )
+) //, 'Loser!');
+console.log(
+  bingo(
+    [
+      ['ABC', 65],
+      ['HGR', 74],
+      ['BYHT', 74],
+    ],
+    1
+  )
+) //, 'Winner!');
+console.log(
+  bingo(
+    [
+      ['HGTYRE', 74],
+      ['BE', 66],
+      ['JKTY', 74],
+    ],
+    3
+  )
+) //, 'Loser!');
+
+// #115  Row Weights
+
+function rowWeights(array) {
+  let firstTeam = 0
+  let secondTeam = 0
+  for (let i = 0; i < array.length; i++) {
+    if (i % 2 === 0) {
+      firstTeam += array[i]
+    } else {
+      secondTeam += array[i]
+    }
+  }
+  return [firstTeam, secondTeam]
+}
+
+console.log(rowWeights([80])) //, [80, 0])
+console.log(rowWeights([100, 50])) //, [100, 50])
+console.log(rowWeights([0])) //, [0, 0])
+console.log(rowWeights([39, 84, 74, 18, 59, 72, 35, 61])) //, [207, 235])
+console.log(rowWeights([0, 1, 0])) //, [0, 1])
+
+// #116  Scrolling Text
+
+function scrollingText(text) {
+  const newText = text.toUpperCase().split('')
+  for (let i = 0; i < array.length; i++) {}
+}
+
+console.log(scrollingText('abc')) //, ['ABC', 'BCA', 'CAB'])
+
+// #117 zipWith
+
+function zipWith(fn, a0, a1) {
+  return []
+}
+
+// #118 Beginner - Lost Without a Map
+function maps(x) {
+  return x.map((num) => num * 2)
+}
+
+console.log(maps([1, 2, 3])) //, [2, 4, 6]);
+
+// #119 Array plus array
+function arrayPlusArray(arr1, arr2) {
+  return [...arr1, ...arr2].reduce((a, b) => a + b)
+}
+
+console.log(arrayPlusArray([1, 2, 3], [4, 5, 6])) //, 21);
+console.log(arrayPlusArray([-1, -2, -3], [-4, -5, -6])) //, -21);
+
+// #120  Is every value in the array an array?
+
+function arrCheck(value) {
+  return value.every((item) => Array.isArray(item))
+}
+console.log(arrCheck([])) //, true);
+console.log(arrCheck(['A', 'R', 'R', 'A', 'Y'])) //, false);
+
+// #121  Make a square box!
+
+function box(n) {
+  arr = []
+  for (let i = 0; i < n; i++) {
+    arr.push('-'.repeat(n))
+  }
+  console.log(arr)
+}
+
+console.log(box(5)) //, ['-----', '-   -', '-   -', '-   -', '-----'])
+console.log(box(2)) //, ['--', '--'])
+console.log(box(3)) //, ['---', '- -', '---'])
