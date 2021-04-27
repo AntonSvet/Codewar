@@ -76,7 +76,7 @@ function getCount(str) {
 
 console.log(getCount('abracadabra')) //, 5)
 
-// #107 Playing with digits //no result
+// #107 Playing with digits //no result ----
 
 function digPow(n, p) {}
 
@@ -276,7 +276,7 @@ function scrollingText(text) {
 
 console.log(scrollingText('abc')) //, ['ABC', 'BCA', 'CAB'])
 
-// #117 zipWith
+// #117 zipWith -----
 
 function zipWith(fn, a0, a1) {
   return []
@@ -305,16 +305,121 @@ function arrCheck(value) {
 console.log(arrCheck([])) //, true);
 console.log(arrCheck(['A', 'R', 'R', 'A', 'Y'])) //, false);
 
-// #121  Make a square box!
+// #121  Make a square box! ---
 
 function box(n) {
   arr = []
   for (let i = 0; i < n; i++) {
-    arr.push('-'.repeat(n))
+    if (i === 0 || i === n - 1) {
+      arr.push('-'.repeat(n))
+    } else {
+      arr.push('-' + ' '.repeat(n - 2) + '-')
+    }
   }
-  console.log(arr)
+  return arr
 }
 
 console.log(box(5)) //, ['-----', '-   -', '-   -', '-   -', '-----'])
 console.log(box(2)) //, ['--', '--'])
 console.log(box(3)) //, ['---', '- -', '---'])
+
+// #122  Magic Index
+function findMagic(arr) {
+  //return arr.find((item,ind) => item === ind) || -1;
+  //return arr.findIndex((ind) => arr[ind] === ind) || -1
+  let magicNum = 0
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === i) {
+      magicNum = arr[i]
+    }
+  }
+  return magicNum > 0 ? magicNum : -1
+}
+
+// #123 Flatten and sort an array
+function flattenAndSort(array) {
+  /* const newArray = array.reduce((a, b) => a.concat(b), [])
+  return newArray.sort((a, b) => a - b) */
+  return [].concat(...array).sort((a, b) => a - b)
+}
+console.log(flattenAndSort([])) //, []);
+console.log(flattenAndSort([[], []])) //, []);
+console.log(flattenAndSort([[], [1]])) //, [1]);
+console.log(flattenAndSort([[1, 3, 5], [100], [2, 4, 6]])) //, [1, 2, 3, 4, 5, 6, 100]);
+
+// #124 Two Sum  ------
+
+function twoSum(numbers, target) {
+  // ...
+}
+
+console.log(twoSum([1, 2, 3], 4).sort(numericalCompare)) //, [0,2]);
+console.log(twoSum([1234, 5678, 9012], 14690).sort(numericalCompare)) //, [1,2]);
+console.log(twoSum([2, 2, 3], 4).sort(numericalCompare)) //, [0,1]);
+
+// #125  Length of missing array
+function getLengthOfMissingArray(arrayOfArrays) {
+  return 0
+}
+console.log(
+  getLengthOfMissingArray([[1, 2], [4, 5, 1, 1], [1], [5, 6, 7, 8, 9]])
+) //, 3);
+console.log(
+  getLengthOfMissingArray([[5, 2, 9], [4, 5, 1, 1], [1], [5, 6, 7, 8, 9]])
+) //, 2);
+console.log(getLengthOfMissingArray([[null], [null, null, null]])) //, 2);
+console.log(
+  getLengthOfMissingArray([
+    ['a', 'a', 'a'],
+    ['a', 'a'],
+    ['a', 'a', 'a', 'a'],
+    ['a'],
+    ['a', 'a', 'a', 'a', 'a', 'a'],
+  ])
+) //, 5);
+
+// #128 Alternate capitalization
+
+function capitalize(s) {
+  arrLetters = s.split('')
+
+  let firstCap = ''
+  let secondCap = ''
+
+  for (let i = 0; i < arrLetters.length; i++) {
+    if (i % 2 === 0) {
+      firstCap += arrLetters[i].toUpperCase()
+      secondCap += arrLetters[i]
+    } else {
+      firstCap += arrLetters[i]
+      secondCap += arrLetters[i].toUpperCase()
+    }
+  }
+  return [firstCap, secondCap]
+}
+
+console.log(capitalize('abracadabra')) //, ['AbRaCaDaBrA', 'aBrAcAdAbRa'])
+console.log(capitalize('codewarriors')) //, ['CoDeWaRrIoRs', 'cOdEwArRiOrS'])
+
+//// №130   Format a string of names like 'Bart, Lisa & Maggie'.
+function list(characters) {
+  const names = characters.map((x) => x.name)
+  return names.join(',')
+}
+
+console.log(
+  list([
+    { name: 'Bart' },
+    { name: 'Lisa' },
+    { name: 'Maggie' },
+    { name: 'Homer' },
+    { name: 'Marge' },
+  ])
+) ///, 'Bart, Lisa, Maggie, Homer & Marge',
+//"Must work with many names")
+console.log(list([{ name: 'Bart' }, { name: 'Lisa' }, { name: 'Maggie' }])) ///, 'Bart, Lisa & Maggie',
+//"Must work with many names")
+console.log(list([{ name: 'Bart' }, { name: 'Lisa' }])) //, 'Bart & Lisa',
+//"Must work with two names")
+console.log(list([{ name: 'Bart' }])) ///   , 'Bart', "Wrong output for a single name")
+console.log(list([])) ///, '', "Must work with no names")
