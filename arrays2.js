@@ -261,6 +261,27 @@ console.log(list([{ name: 'Bart' }])) ///   , 'Bart', "Wrong output for a single
 console.log(list([])) ///, '', "Must work with no names")
 
 // #131
+function proofread(str) {
+  var newstr = str.toLowerCase().replace('ie', 'ei')
+  console.log(newstr)
+  // const arr = Array.from(str.toLowerCase())
+
+  // const word = []
+  // for (let i = 0; i < arr.length; i++) {
+  //   if (arr[i] === 'i' && arr[i + 1] === 'e') {
+  //     word.push('ei')
+  //   } else {
+  //     word.push(arr[i])
+  //   }
+  // }
+  // word[0] = word[0].toUpperCase()
+  // console.log(word.join(''))
+}
+
+console.log(proofread('ThiEr DEcIEt wAs INconcIEVablE. sHe SIeZeD thE moMENT.')) //, "Their deceit was inconceivable. She seized the moment.");
+console.log(proofread('HIs nieghBOur wAs oVerwieGht.')) //, "His neighbour was overweight.");
+console.log(proofread('SHe rEcieveD a pIegNor.')) //, "She received a peignor.");
+
 // #132
 // #133
 // #134
