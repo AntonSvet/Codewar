@@ -260,32 +260,59 @@ console.log(list([{ name: 'Bart' }, { name: 'Lisa' }])) //, 'Bart & Lisa',
 console.log(list([{ name: 'Bart' }])) ///   , 'Bart', "Wrong output for a single name")
 console.log(list([])) ///, '', "Must work with no names")
 
-// #131
+// #131  -----
 function proofread(str) {
-  var newstr = str.toLowerCase().replace('ie', 'ei')
-  console.log(newstr)
-  // const arr = Array.from(str.toLowerCase())
-
-  // const word = []
-  // for (let i = 0; i < arr.length; i++) {
-  //   if (arr[i] === 'i' && arr[i + 1] === 'e') {
-  //     word.push('ei')
-  //   } else {
-  //     word.push(arr[i])
-  //   }
-  // }
-  // word[0] = word[0].toUpperCase()
-  // console.log(word.join(''))
+  const arr = str.toLowerCase().split(' ')
+  const newArr = arr.map((item) => item.replace('ie', 'ei')).join(' ')
+  str1 = newArr[0].toUpperCase() + newArr.slice(1)
+  return str1
 }
-
 console.log(proofread('ThiEr DEcIEt wAs INconcIEVablE. sHe SIeZeD thE moMENT.')) //, "Their deceit was inconceivable. She seized the moment.");
 console.log(proofread('HIs nieghBOur wAs oVerwieGht.')) //, "His neighbour was overweight.");
-console.log(proofread('SHe rEcieveD a pIegNor.')) //, "She received a peignor.");
 
-// #132
-// #133
-// #134
-// #135  Sort with a sorting array
-function sort(initialArray, sortingArray) {}
+// #132 Simple Fun #79: Delete a Digit
+
+function deleteDigit(n) {
+  //coding and coding..
+}
+
+console.log(deleteDigit(152)) //,52)
+
+console.log(deleteDigit(1001)) //,101)
+
+console.log(deleteDigit(10)) //,1)
+
+// #133  Equal Sides Of An Array
+function findEvenIndex(arr) {
+  //Code goes here!
+}
+console.log(findEvenIndex([1, 2, 3, 4, 3, 2, 1])) //,3, "The array was: [1,2,3,4,3,2,1] \n");
+console.log(findEvenIndex([1, 100, 50, -51, 1, 1])) //,1, "The array was: [1,100,50,-51,1,1] \n");
+console.log(findEvenIndex([1, 2, 3, 4, 5, 6])) //,-1, "The array was: [1,2,3,4,5,6] \n");
+console.log(findEvenIndex([20, 10, 30, 10, 10, 15, 35])) //,3, "The array was: [20,10,30,10,10,15,35] \n");
+// #134 Easy Balance Checking
+function balance(book) {
+  // your code
+  // Please use .toFixed(2) to format numbers
+}
+
+// #135  Sort with a sorting array ++++
+function sort(initialArray, sortingArray) {
+  const newArr = []
+  for (let i = 0; i < initialArray.length; i++) {
+    newArr[sortingArray[i]] = initialArray[i]
+  }
+
+  return newArr
+}
 
 console.log(sort([1, 2, 3, 4, 5], [0, 2, 1, 4, 3])) //, [1, 3, 2, 5, 4]);
+
+// #136 Zero-plentiful Array
+
+function zeroPlentiful(arr) {
+  const zeros = arr.filter((zero) => zero === 0)
+  return zeros.length > 3 ? Math.floor(zeros.length / 4) : 0
+}
+console.log(zeroPlentiful([3])) ///,0);
+console.log(zeroPlentiful([0, 0, 0, 0, 0, 0])) ///,1);
