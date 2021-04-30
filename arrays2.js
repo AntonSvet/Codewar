@@ -19,11 +19,22 @@ console.log(rowWeights([0])) //, [0, 0])
 console.log(rowWeights([39, 84, 74, 18, 59, 72, 35, 61])) //, [207, 235])
 console.log(rowWeights([0, 1, 0])) //, [0, 1])
 
-// #116  Scrolling Text ---------
+//+ #116  Scrolling Text
 
 function scrollingText(text) {
-  const newText = text.toUpperCase().split('')
-  for (let i = 0; i < array.length; i++) {}
+  let newText = text.toUpperCase()
+  array = []
+  for (let i = 0; i < newText.length; i++) {
+    if (i === 0) {
+      array.push(newText)
+    } else {
+      letter = newText.slice(0, 1)
+      letters = newText.slice(1, newText.length)
+      newText = letters + letter
+      array.push(newText)
+    }
+  }
+  return array
 }
 
 console.log(scrollingText('abc')) //, ['ABC', 'BCA', 'CAB'])
@@ -31,8 +42,18 @@ console.log(scrollingText('abc')) //, ['ABC', 'BCA', 'CAB'])
 // #117 zipWith -----
 
 function zipWith(fn, a0, a1) {
-  return []
+  //return a0.map((item) => a1.map((item2) => fn(item, item2)))
+  arr = []
+  for (let i = 0; i < a0.length; i++) {
+    console.log(a0[i], a1[i])
+    arr.push(fn(a0[i], a1[i]))
+  }
 }
+const plus = (a, b) => a + b
+
+console.log(zipWith(plus, [0, 1, 2, 3, 4, 5], [6, 5, 4, 3, 2, 1])) //, [6,6,6,6,6,6]);
+console.log(zipWith(plus, [0, 1, 2, 3, 4], [6, 5, 4, 3, 2, 1])) //, [6,6,6,6,6  ]);
+console.log(zipWith(plus, [0, 1, 2, 3, 4, 5], [6, 5, 4, 3, 2])) //, [6,6,6,6,6  ]);
 
 //+ #118 Beginner - Lost Without a Map
 function maps(x) {
@@ -119,10 +140,21 @@ console.log(twoSum([2, 2, 3], 4)) //.sort(numericalCompare)) //, [0,1]);
 function getLengthOfMissingArray(arrayOfArrays) {
   const s = arrayOfArrays.map((array) => array.length)
   const sort = s.sort((a, b) => a - b)
-  return sort.find((item, i) => !sort.includes(i + 1))
+  console.log(sort)
+  //let ind = sort.findIndex((item, i, array) => item !== i + 1) //????????
+  for (let i = 0; i < sort.length; i++) {
+    if (sort[i + 1] - sort[i] === 1) {
+      continue
+    }
+    return i
+  }
 }
 console.log(
-  getLengthOfMissingArray([[1, 2], [4, 5, 1, 1], [1], [5, 6, 7, 8, 9]])
+  getLengthOfMissingArray([
+    [1, 2],
+    [4, 5, 1, 1],
+    [5, 6, 7, 8, 9],
+  ])
 ) //, 3);
 console.log(
   getLengthOfMissingArray([[5, 2, 9], [4, 5, 1, 1], [1], [5, 6, 7, 8, 9]])
@@ -137,15 +169,14 @@ console.log(
     ['a', 'a', 'a', 'a', 'a', 'a'],
   ])
 ) //, 5);
-// #126  Data Reverse  -------------
+//+ #126  Data Reverse
 function dataReverse(data) {
-  const s = []
-  for (let i = 0; i < data.length; i) {
+  const reverse = []
+  for (let i = 0; i < data.length; i += 8) {
     let a = data.slice(i, i + 8)
-    s.unshift(a)
+    reverse.unshift(...a)
   }
-  //const t = s.reduce((acc, int) => acc.concat(int))
-  console.log(s)
+  return reverse
 }
 
 const data1 = [
@@ -188,15 +219,17 @@ const data3 = [0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1]
 //const data4 = [0,0,1,0,1,0,0,1,0,0,1,1,0,1,1,0]
 console.log(dataReverse(data3)) //,data4)
 
-// #127  Duplicate Encoder
+// #127  Duplicate Encoder  -------
 function duplicateEncode(word) {
   const array = Array.from(word.toLowerCase())
   let a = ''
-  for (let i = 0; i < array.length; i++) {
-    if (array.includes(array[i])) {
-      a += '('
-    } else {
-      a += ')'
+  for (let i = 0; i < word.length; i++) {
+    for (let j = 1; j < word.length; j++) {
+      if (word[i] === word[j]) {
+        a += ')'
+      } else {
+        a += '('
+      }
     }
   }
   return a
@@ -433,10 +466,18 @@ console.log(sortByLength(['', 'Moderately', 'Brains', 'Pizza'])) //,["", "Pizza"
 
 console.log(sortByLength(['Longer', 'Longest', 'Short'])) //,["Short", "Longer", "Longest"]);
 
-// #143 Binary Search
+// #143 Binary Search   ---------------------
 
 function binSearch(arr, toSearch) {
-  // TODO
+  let ind = Math.ceil((arr.length - 1) / 2)
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[ind] > toSearch) {
+      arr = arr.slice(0, arr[ind])
+    } else {
+      arr = arr.slice(arr[ind])
+    }
+  }
 }
 
 let arr = [1, 2, 3, 4, 5]
