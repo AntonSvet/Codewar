@@ -57,40 +57,58 @@
 // console.log(duplicateEncode('Success')) //,")())())","should ignore case");
 // console.log(duplicateEncode('(( @')) //,"))((");
 
-// // #129 Sort the odd ----
+// #129 Sort the odd ----
 
-// function sortArray(array) {
-//   // Return a sorted array.
-// }
+function sortArray(array) {
+  return array.sort((acc, int) => (acc % 2 && int % 2 ? acc - int : 0))
+}
 
-// console.log(sortArray([5, 3, 2, 8, 1, 4])) //, [1, 3, 2, 8, 5, 4]);
-// console.log(sortArray([5, 3, 1, 8, 0])) //, [1, 3, 5, 8, 0]);
-// console.log(sortArray([])) //,[]);
+console.log(sortArray([5, 3, 2, 8, 1, 4])) //, [1, 3, 2, 8, 5, 4]);
+console.log(sortArray([5, 3, 1, 8, 0])) //, [1, 3, 5, 8, 0]);
+console.log(sortArray([])) //,[]);
 
-// // #132 Simple Fun #79: Delete a Digit  ----
-// function deleteDigit(n) {
-//   //coding and coding..
-// }
+// #132 Simple Fun #79: Delete a Digit  ----
+function deleteDigit(n) {
+  let arr = Array.from(n.toString())
+  const result = []
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[i] > arr[j]) {
+        result.push(arr[i])
+      }
+    }
+  }
+  return result.join('')
+}
 
-// console.log(deleteDigit(152)) //,52)
+console.log(deleteDigit(152)) //,52)
 
-// console.log(deleteDigit(1001)) //,101)
+console.log(deleteDigit(1001)) //,101)
 
-// console.log(deleteDigit(10)) //,1)
+console.log(deleteDigit(10)) //,1)
 
-// // #133  Equal Sides Of An Array  ----
-// function findEvenIndex(arr) {
-//   //Code goes here!
-// }
-// console.log(findEvenIndex([1, 2, 3, 4, 3, 2, 1])) //,3, "The array was: [1,2,3,4,3,2,1] \n");
-// console.log(findEvenIndex([1, 100, 50, -51, 1, 1])) //,1, "The array was: [1,100,50,-51,1,1] \n");
-// console.log(findEvenIndex([1, 2, 3, 4, 5, 6])) //,-1, "The array was: [1,2,3,4,5,6] \n");
-// console.log(findEvenIndex([20, 10, 30, 10, 10, 15, 35])) //,3, "The array was: [20,10,30,10,10,15,35] \n");
-// // #134 Easy Balance Checking   ----
-// function balance(book) {
-//   // your code
-//   // Please use .toFixed(2) to format numbers
-// }
+// #133  Equal Sides Of An Array  ----
+function findEvenIndex(arr) {
+  for (let i = 1; i < arr.length - 1; i++) {
+    if (
+      arr.slice(0, i).reduce((a, b) => a + b) ===
+      arr.slice(i + 1).reduce((a, b) => a + b)
+    ) {
+      return i
+    }
+  }
+  return -1
+}
+console.log(findEvenIndex([1, 2, 3, 4, 3, 2, 1])) //,3, "The array was: [1,2,3,4,3,2,1] \n");
+console.log(findEvenIndex([1, 100, 50, -51, 1, 1])) //,1, "The array was: [1,100,50,-51,1,1] \n");
+console.log(findEvenIndex([1, 2, 3, 4, 5, 6])) //,-1, "The array was: [1,2,3,4,5,6] \n");
+console.log(findEvenIndex([20, 10, 30, 10, 10, 15, 35])) //,3, "The array was: [20,10,30,10,10,15,35] \n");
+console.log(findEvenIndex([20, 10, 30, 10, 5, 5, 5, 5])) //,2, "The array was: [20,10,30,10,10,15,35] \n");
+// #134 Easy Balance Checking   ----
+function balance(book) {
+  // your code
+  // Please use .toFixed(2) to format numbers
+}
 
 // //+ #135  Sort with a sorting array
 // function sort(initialArray, sortingArray) {
@@ -104,27 +122,27 @@
 
 // console.log(sort([1, 2, 3, 4, 5], [0, 2, 1, 4, 3])) //, [1, 3, 2, 5, 4]);
 
-// // #136 Zero-plentiful Array  ----
+// #136 Zero-plentiful Array  ----
 
-// function zeroPlentiful(arr) {
-//   // const zeros = arr.filter((zero) => zero === 0)
-//   // return zeros.length > 3 ? Math.floor(zeros.length / 4) : 0
-//   let counter = 0
-//   let zero = 0
-//   for (let i = 0; i < arr.length; i++) {
-//     if (arr[i] === 0) {
-//       counter++
-//       if (counter === 4) {
-//         zero++
-//       }
-//     } else {
-//       counter = 0
-//     }
-//   }
-//   return zero
-// }
-// console.log(zeroPlentiful([3])) ///,0);
-// console.log(zeroPlentiful([0, 0, 0, 0, 1, 0])) ///,1);
+function zeroPlentiful(arr) {
+  // const zeros = arr.filter((zero) => zero === 0)
+  // return zeros.length > 3 ? Math.floor(zeros.length / 4) : 0
+  let counter = 0
+  let zero = 0
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === 0) {
+      counter++
+      if (counter === 4) {
+        zero++
+      }
+    } else {
+      counter = 0
+    }
+  }
+  return zero
+}
+console.log(zeroPlentiful([3])) ///,0);
+console.log(zeroPlentiful([0, 0, 0, 0, 1, 0])) ///,1);
 
 // // #137 RGB To Hex Conversion  ----
 
@@ -203,19 +221,19 @@
 // console.log(indexEqualsValue([9, 10, 11, 12, 13, 14])) //, -1 );
 // console.log(indexEqualsValue([0])) //, 0 );
 
-// // #141  Sort by Last Char   -------------
+// #141  Sort by Last Char   -------------
 
-// function last(x) {
-//   const reverse = x
-//     .split(' ')
-//     .map((item) => Array.from(item).reverse().join(''))
-//   const newReverse = reverse.sort()
-//   return newReverse.map((item) => Array.from(item).reverse().join(''))
-// }
+function last(x) {
+  const reverse = x
+    .split(' ')
+    .map((item) => Array.from(item).reverse().join(''))
+  const newReverse = reverse.sort()
+  return newReverse.map((item) => Array.from(item).reverse().join(''))
+}
 
-// console.log(last('man i need a taxi up to ubud')) //, ['a', 'need', 'ubud', 'i', 'taxi', 'man', 'to', 'up']);
-// console.log(last('what time are we climbing up the volcano')) //, ['time', 'are', 'we', 'the', 'climbing', 'volcano', 'up', 'what']);
-// console.log(last('take me to semynak')) //, ['take', 'me', 'semynak', 'to']);
+console.log(last('man i need a taxi up to ubud')) //, ['a', 'need', 'ubud', 'i', 'taxi', 'man', 'to', 'up']);
+console.log(last('what time are we climbing up the volcano')) //, ['time', 'are', 'we', 'the', 'climbing', 'volcano', 'up', 'what']);
+console.log(last('take me to semynak')) //, ['take', 'me', 'semynak', 'to']);
 
 // //+ #142 Sort array by string length
 
