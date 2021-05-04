@@ -188,24 +188,24 @@
 // //const data4 = [0,0,1,0,1,0,0,1,0,0,1,1,0,1,1,0]
 // console.log(dataReverse(data3)) //,data4)
 
-//+ #127  Duplicate Encoder  ---- не проходит тесты
+// //+ #127  Duplicate Encoder
 // function duplicateEncode(word) {
-// const array = Array.from(word.toLowerCase())
-// let a = ''
-// for (let i = 0; i < word.length; i++) {
-//   let count = 0
-//   for (let j = 0; j < word.length; j++) {
-//     if (word[i] === word[j]) {
-//       count++
+//   let a = ''
+//   const words = word.toLowerCase()
+//   for (let i = 0; i < words.length; i++) {
+//     let count = 0
+//     for (let j = 0; j < words.length; j++) {
+//       if (words[i] === words[j]) {
+//         count++
+//       }
+//     }
+//     if (count > 1) {
+//       a += ')'
+//     } else {
+//       a += '('
 //     }
 //   }
-//   if (count > 1) {
-//     a += ')'
-//   } else {
-//     a += '('
-//   }
-// }
-// return a
+//   return a
 // }
 
 // console.log(duplicateEncode('din')) //,"(((");
