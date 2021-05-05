@@ -160,18 +160,30 @@
 // console.log(cake(56, 'ifkhchlhfd')) //, 'Fire!');
 // console.log(cake(256, 'aaaaaddddr')) //, 'Fire!');
 
-//#140 Element equals its index ?????? That took too long, duration ( actual: 3331 ms ) should be under 150 ms
+//+ #140 Element equals its index ?????? That took too long, duration ( actual: 3331 ms ) should be under 150 ms
 
 //sorted array → binary search
-function indexEqualsValue(a) {
-  const first = 0
-  const last = a.length - 1
-  let mid = Math.floor(first + last / 2)
-}
+// function indexEqualsValue(a) {
+//   let left = 0
+//   let right = a.length - 1
 
-console.log(indexEqualsValue([-8, 0, 2, 5])) //, 2 );
-console.log(indexEqualsValue([9, 10, 11, 12, 13, 14])) //, -1 );
-console.log(indexEqualsValue([0])) //, 0 );
+//   while (left < right) {
+//     let mid = Math.floor((left + right) / 2)
+
+//     if (mid === a[mid]) {
+//       right = mid
+//     } else if (mid > a[mid]) {
+//       left = mid + 1
+//     } else if (mid < a[mid]) {
+//       right = mid - 1
+//     }
+//   }
+//   return a[right] === right ? right : -1
+// }
+
+// console.log(indexEqualsValue([-8, 0, 2, 5])) //, 2 );
+// console.log(indexEqualsValue([9, 10, 11, 12, 13, 14])) //, -1 );
+// console.log(indexEqualsValue([0])) //, 0 );
 
 // #141  Sort by Last Char   -------------
 
@@ -199,21 +211,28 @@ console.log(indexEqualsValue([0])) //, 0 );
 
 // console.log(sortByLength(['Longer', 'Longest', 'Short'])) //,["Short", "Longer", "Longest"]);
 
-// // #143 Binary Search   ---------------------
+// #143 Binary Search   ---------------------
 
-// function binSearch(arr, toSearch) {
-//   let ind = Math.ceil((arr.length - 1) / 2)
+function binSearch(arr, toSearch) {
+  let left = 0
+  let right = arr.length - 1
 
-//   for (let i = 0; i < arr.length; i++) {
-//     if (arr[ind] > toSearch) {
-//       arr = arr.slice(0, arr[ind])
-//     } else {
-//       arr = arr.slice(arr[ind])
-//     }
-//   }
-// }
+  while (left < right) {
+    let mid = Math.floor((left + right) / 2)
+    console.log('##', arr[mid])
+    if (arr[mid] === toSearch) {
+      return mid
+    } else if (arr[mid] < toSearch) {
+      left = arr[mid]
+    } else if (arr[mid] > toSearch) {
+      right = arr[mid] - 1
+    }
+  }
 
-// let arr = [1, 2, 3, 4, 5]
+  return -1
+}
 
-// console.log(binSearch(arr, 6)) //, -1)
-// console.log(binSearch(arr, 2)) //, 1)
+let arr = [1, 2, 3, 4, 5]
+
+console.log(binSearch(arr, 6)) //, -1)
+console.log(binSearch(arr, 2)) //, 1)
