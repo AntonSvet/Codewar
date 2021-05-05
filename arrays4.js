@@ -130,16 +130,21 @@
 // 	})
 // })
 
-// // #137 RGB To Hex Conversion  ----
+//+ #137 RGB To Hex Conversion
+function rgb(r, g, b) {
+  function decToHex(c) {
+    if (c > 255) return 'FF'
+    else if (c < 0) return '00'
+    else return c.toString(16).padStart(2, '0').toUpperCase()
+  }
 
-// function rgb(r, g, b) {
-//   // complete this function
-// }
+  return decToHex(r) + decToHex(g) + decToHex(b)
+}
 
-// console.log(rgb(0, 0, 0)) //, '000000')
-// console.log(rgb(0, 0, -20)) //, '000000')
-// console.log(rgb(300, 255, 255)) //, 'FFFFFF')
-// console.log(rgb(173, 255, 47)) //, 'ADFF2F')
+console.log(rgb(0, 0, 0)) //, '000000')
+console.log(rgb(0, 0, -20)) //, '000000')
+console.log(rgb(300, 255, 255)) //, 'FFFFFF')
+console.log(rgb(173, 255, 47)) //, 'ADFF2F')
 
 // //+ #138 Birthday I - Cake
 // function cake(x, y) {
@@ -185,14 +190,17 @@
 // console.log(indexEqualsValue([9, 10, 11, 12, 13, 14])) //, -1 );
 // console.log(indexEqualsValue([0])) //, 0 );
 
-// #141  Sort by Last Char   -------------
+//+ #141  Sort by Last Char
 
 // function last(x) {
 //   const reverse = x
 //     .split(' ')
 //     .map((item) => Array.from(item).reverse().join(''))
-//   const newReverse = reverse.sort()
+//   const newReverse = reverse.sort(
+//     (a, b) => a.charCodeAt(a[0]) - b.charCodeAt(b[0])
+//   )
 //   return newReverse.map((item) => Array.from(item).reverse().join(''))
+//   //return x.split(" ").sort((a,b) => a.charCodeAt(a.length -1) - b.charCodeAt(b.length-1));
 // }
 
 // console.log(last('man i need a taxi up to ubud')) //, ['a', 'need', 'ubud', 'i', 'taxi', 'man', 'to', 'up']);
@@ -213,26 +221,26 @@
 
 // #143 Binary Search   ---------------------
 
-function binSearch(arr, toSearch) {
-  let left = 0
-  let right = arr.length - 1
+// function binSearch(arr, toSearch) {
+//   let left = 0
+//   let right = arr.length - 1
 
-  while (left < right) {
-    let mid = Math.floor((left + right) / 2)
-    console.log('##', arr[mid])
-    if (arr[mid] === toSearch) {
-      return mid
-    } else if (arr[mid] < toSearch) {
-      left = arr[mid]
-    } else if (arr[mid] > toSearch) {
-      right = arr[mid] - 1
-    }
-  }
+//   while (left < right) {
+//     let mid = Math.floor((left + right) / 2)
+//     console.log('##', arr[mid])
+//     if (arr[mid] === toSearch) {
+//       return mid
+//     } else if (arr[mid] < toSearch) {
+//       left = arr[mid]
+//     } else if (arr[mid] > toSearch) {
+//       right = arr[mid] - 1
+//     }
+//   }
 
-  return -1
-}
+//   return -1
+// }
 
-let arr = [1, 2, 3, 4, 5]
+// let arr = [1, 2, 3, 4, 5]
 
-console.log(binSearch(arr, 6)) //, -1)
-console.log(binSearch(arr, 2)) //, 1)
+// console.log(binSearch(arr, 6)) //, -1)
+// console.log(binSearch(arr, 2)) //, 1)
