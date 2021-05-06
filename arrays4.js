@@ -61,90 +61,47 @@
 // console.log(findEvenIndex([20, 10, 30, 10, 10, 15, 35])) //,3, "The array was: [20,10,30,10,10,15,35] \n");
 // console.log(findEvenIndex([20, 10, 30, 10, 5, 5, 5, 5])) //,2, "The array was: [20,10,30,10,10,15,35] \n");
 
-// //#134 Easy Balance Checking   ----
+//+ #134 Easy Balance Checking
 // function balance(book) {
-//   const result = book.replace(/[^a-zA-Z0-9\.\s]/g, '').split('\n')
-
-//   console.log(result)
+//   const arr = book.replace(/[^a-zA-Z0-9\.\s]/g, '').split('\n')
+//   const result = []
+//   let bal = arr[0]
+//   result.push('Original Balance: ' + (+arr[0]).toFixed(2))
+//   let count = 0
+//   for (let i = 1; i < arr.length; ++i)
+//     if (arr[i].length != 0) {
+//       count++
+//       let ar = arr[i].split(' ')
+//       bal = +bal - +ar[2]
+//       result.push(
+//         `${ar[0]} ${ar[1]} ${(+ar[2]).toFixed(2)} Balance ${bal.toFixed(2)}`
+//       )
+//     }
+//   result.push('Total expense  ' + (arr[0] - bal).toFixed(2))
+//   result.push('Average expense  ' + ((arr[0] - bal) / count).toFixed(2))
+//   return result.join('\r\n')
 // }
-// // "Original_Balance:_1000.00
-// // 125_Market_125.45_Balance_874.55
-// // 126_Hardware_34.95_Balance_839.60
-// // 127_Video_7.45_Balance_832.15
-// // 128_Book_14.32_Balance_817.83
-// // 129_Gasoline_16.10_Balance_801.73
-// // Total_expense__198.27
-// // Average_expense__39.65"
-
-// // var b1 = `1000.00!=
-
-// // 125 Market !=:125.45
-// // 126 Hardware =34.95
-// // 127 Video! 7.45
-// // 128 Book :14.32
-// // 129 Gasoline ::16.10
-// // `
-// // var b1sol = `Original Balance: 1000.00\r
-// // 125 Market 125.45 Balance 874.55\r
-// // 126 Hardware 34.95 Balance 839.60\r
-// // 127 Video 7.45 Balance 832.15\r
-// // 128 Book 14.32 Balance 817.83\r
-// // 129 Gasoline 16.10 Balance 801.73\r
-// // Total expense  198.27\r
-// // Average expense  39.65`
-
-// var b2 = `1233.00
-// 125 Hardware;! 24.8?;
-// 123 Flowers 93.5
-// 127 Meat 120.90
-// 120 Picture 34.00
-// 124 Gasoline 11.00
-// 123 Photos;! 71.4?;
-// 122 Picture 93.5
-// 132 Tyres;! 19.00,?;
-// 129 Stamps 13.6
-// 129 Fruits{} 17.6
-// 129 Market;! 128.00?;
-// 121 Gasoline;! 13.6?;`
-// balance(b2)
-// // var b2sol = `Original Balance: 1233.00\r
-// 125 Hardware 24.80 Balance 1208.20\r
-// 123 Flowers 93.50 Balance 1114.70\r
-// 127 Meat 120.90 Balance 993.80\r
-// 120 Picture 34.00 Balance 959.80\r
-// 124 Gasoline 11.00 Balance 948.80\r
-// 123 Photos 71.40 Balance 877.40\r
-// 122 Picture 93.50 Balance 783.90\r
-// 132 Tyres 19.00 Balance 764.90\r
-// 129 Stamps 13.60 Balance 751.30\r
-// 129 Fruits 17.60 Balance 733.70\r
-// 129 Market 128.00 Balance 605.70\r
-// 121 Gasoline 13.60 Balance 592.10\r
-// Total expense  640.90\r
-// Average expense  53.41`
-
-// describe('balance', () => {
-// 	it('Basic tests', () => {
-// 		Test.assertEquals(balance(b1), b1sol)
-// 		Test.assertEquals(balance(b2), b2sol)
-// 	})
-// })
 
 //+ #137 RGB To Hex Conversion
-function rgb(r, g, b) {
-  function decToHex(c) {
-    if (c > 255) return 'FF'
-    else if (c < 0) return '00'
-    else return c.toString(16).padStart(2, '0').toUpperCase()
-  }
+// function rgb(r, g, b) {
+//   function hex(c) {
+//     if (c > 255) return 'FF'
+//     else if (c < 0) return '00'
+//     else {
+//       let hex = c.toString(16).toUpperCase() //else return c.toString(16).padStart(2, '0').toUpperCase()
+//       if (c < 16) {
+//         hex = '0' + hex
+//       }
+//       return hex
+//     }
+//   }
+//   return hex(r) + hex(g) + hex(b)
+// }
 
-  return decToHex(r) + decToHex(g) + decToHex(b)
-}
-
-console.log(rgb(0, 0, 0)) //, '000000')
-console.log(rgb(0, 0, -20)) //, '000000')
-console.log(rgb(300, 255, 255)) //, 'FFFFFF')
-console.log(rgb(173, 255, 47)) //, 'ADFF2F')
+// console.log(rgb(0, 0, 0)) //, '000000')
+// console.log(rgb(0, 0, -20)) //, '000000')
+// console.log(rgb(300, 255, 255)) //, 'FFFFFF')
+// console.log(rgb(173, 255, 47)) //, 'ADFF2F')
 
 // //+ #138 Birthday I - Cake
 // function cake(x, y) {
