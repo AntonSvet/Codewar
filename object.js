@@ -46,18 +46,18 @@
 // console.log(scoreboard('The score is four nil')) //, [4,0], "Should return: [4,0]");
 // console.log(scoreboard('new score: two three')) //, [2,3], "Should return: [2,3]");
 
-// //+ # 202 The Office I - Outed
+//+ # 202 The Office I - Outed
 // function outed(meet, boss) {
-//   const len = Object.keys(meet).length
-//   let happiness = 0
+//   const persons = Object.keys(meet).length
+//   let totalScore = 0
 //   for (const key in meet) {
 //     if (key === boss) {
-//       happiness += meet[key] * 2
+//       totalScore += meet[key] * 2
 //     } else {
-//       happiness += meet[key]
+//       totalScore += meet[key]
 //     }
 //   }
-// return happiness / len > 5 ? 'Nice Work Champ!' : 'Get Out Now!'
+//   return totalScore / persons > 5 ? 'Nice Work Champ!' : 'Get Out Now!'
 // }
 
 // console.log(
@@ -200,22 +200,22 @@ console.log(
   )
 ) //, 'alpha beta gamma delta')
 
-// #208 Find the unique number -----------
-function findUnique(numbers) {
-  return numbers.find(
-    (item) => numbers.indexOf(item) === numbers.lastIndexOf(item)
-  )
-}
+// // #208 Find the unique number -----------
+// function findUnique(numbers) {
+//   return numbers.find(
+//     (item) => numbers.indexOf(item) === numbers.lastIndexOf(item)
+//   )
+// }
 
-function findUnique(numbers) {
-  for (let i = 0; i < numbers.length; i++) {
-    if (numbers.indexOf(numbers[i]) === numbers.lastIndexOf(numbers[i]))
-      return numbers[i]
-  }
-}
-console.log(findUnique([1, 4, 4, 5, 5, 3, 3, 2, 2])) //, 1);
-console.log(findUnique([2, 2, 5, 5, 4, 3, 3, 1, 1])) //, 4);
-console.log(findUnique([3, 5, 5, 4, 4, 3, 2, 2, 9])) //, 9);
+// function findUnique(numbers) {
+//   for (let i = 0; i < numbers.length; i++) {
+//     if (numbers.indexOf(numbers[i]) === numbers.lastIndexOf(numbers[i]))
+//       return numbers[i]
+//   }
+// }
+// console.log(findUnique([1, 4, 4, 5, 5, 3, 3, 2, 2])) //, 1);
+// console.log(findUnique([2, 2, 5, 5, 4, 3, 3, 1, 1])) //, 4);
+// console.log(findUnique([3, 5, 5, 4, 4, 3, 2, 2, 9])) //, 9);
 
 //+ #209 Coding Meetup #2 - Higher-Order Functions Series - Greet developers
 // function greetDevelopers(list) {
@@ -239,18 +239,40 @@ console.log(findUnique([3, 5, 5, 4, 4, 3, 2, 2, 9])) //, 9);
 // console.log(convertHashToArray({ product: 'CodeWars', powerLevelOver: 9000 })) //,[["powerLevelOver", 9000], ["product", "CodeWars"]]);
 // console.log(convertHashToArray({})) //,[]);
 
-// #211 Kebabize
-function kebabize(str) {
-  let newLine = ''
-  for (let i = 0; i < str.length; i++) {
-    if (str[i] === str[i].toUpperCase()) {
-      newLine += '-' + str[i].toLowerCase()
-    } else {
-      newLine += str[i]
-    }
-  }
-  return newLine
-}
+//+ #211 Kebabize
+// function kebabize(str) {
+//   const newStr = str.replace(/[0-9]/g, '')
+//   let newLine = ''
 
-console.log(kebabize('myCamelCasedString')) //, 'my-camel-cased-string');
-console.log(kebabize('myCamelHas3Humps')) //, 'my-camel-has-humps')
+//   for (let i = 0; i < newStr.length; i++) {
+//     if (newStr[i] === newStr[i].toUpperCase()) {
+//       newLine += '-' + newStr[i].toLowerCase()
+//     } else {
+//       newLine += newStr[i]
+//     }
+//   }
+//   return newLine[0] === '-' ? newLine.slice(1) : newLine
+// }
+
+// console.log(kebabize('MyCamelCasedString')) //, 'my-camel-cased-string');
+// console.log(kebabize('myCamelHas3Humps')) //, 'my-camel-has-humps')
+
+// #212   -----------------
+
+// function abbreviate(string) {
+//   if (string.includes('-')) {
+//     return string
+//       .split('-')
+//       .map((item) => item[0] + (item.length - 2) + item[item.length - 1])
+//       .join('-')
+//   } else {
+//     return string[0] + (string.length - 2) + string[string.length - 1]
+//   }
+// }
+
+// console.log(abbreviate('internationalization')) //, "i18n");
+// console.log(abbreviate('accessibility')) //, "a11y");
+// console.log(
+//   abbreviate('You need, need not want, to complete this code-wars mission')
+// ) //, "You n2d, n2d not w2t, to c6e t2s c2e-w2s m5n");
+// console.log(abbreviate('elephant-ride')) //, "e6t-r2e");
