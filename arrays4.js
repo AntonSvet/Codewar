@@ -205,27 +205,27 @@
 
 //#143 Binary Search   ---------------------
 
-function binSearch(arr, toSearch) {
-  let left = 0
-  let right = arr.length - 1
+// function binSearch(arr, toSearch) {
+//   let left = 0
+//   let right = arr.length - 1
 
-  while (left <= right) {
-    let mid = Math.floor((left + right) / 2)
-    if (arr[mid] === toSearch) {
-      return mid
-    }
-    if (arr[mid] < toSearch) {
-      left = mid + 1
-    }
-    if (arr[mid] > toSearch) {
-      right = mid - 1
-    }
-  }
+//   while (left <= right) {
+//     let mid = Math.floor((left + right) / 2)
+//     if (arr[mid] === toSearch) {
+//       return mid
+//     }
+//     if (arr[mid] < toSearch) {
+//       left = mid + 1
+//     }
+//     if (arr[mid] > toSearch) {
+//       right = mid - 1
+//     }
+//   }
 
-  return -1
-}
+//   return -1
+// }
 
-let arr = [1, 2, 3, 4, 5]
+// let arr = [1, 2, 3, 4, 5]
 
-console.log(binSearch(arr, 6)) //, -1)
-console.log(binSearch(arr, 2)) //, 1)
+// console.log(binSearch(arr, 6)) //, -1)
+// console.log(binSearch(arr, 2)) //, 1)

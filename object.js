@@ -1,4 +1,4 @@
-// //+ #200 Complementary DNA
+//+ #200 Complementary DNA
 // function DNAStrand(dna) {
 //   const obj = {
 //     A: 'T',
@@ -9,16 +9,16 @@
 
 //   let newStr = ''
 
-//   for (let i = 0; i < dna.length; i++) {
-//     newStr += obj[dna[i]]
+//   for (const letter of dna) {
+//     newStr += obj[letter]
 //   }
 //   return newStr
 // }
 // //"A" = "T"   "C" = "G"
-// console.log(DNAStrand('ATTGC')) //,"TAACG","String ATTGC is");
+// console.log(DNAStrand('TATGC')) //,"TAACG","String ATTGC is");
 // console.log(DNAStrand('GTAT')) //,"CATA","String GTAT is");
 
-// //+ #201 Convert the score
+//+ #201 Convert the score
 // function scoreboard(string) {
 //   const obj = {
 //     nil: 0,
@@ -33,31 +33,30 @@
 //     nine: 9,
 //   }
 
-//   const newStr = string.split(' ')
-//   const score = []
+//   return string
+//     .split(' ')
+//     .filter((item) => obj.hasOwnProperty(item))
+//     .map((item) => obj[item])
+//   //   //const score = []
 
-//   for (let i = 0; i < newStr.length; i++) {
-//     if (obj.hasOwnProperty(newStr[i])) {
-//       score.push(obj[newStr[i]])
-//     }
-//   }
-//   return score
+//   //   for (let i = 0; i < newStr.length; i++) {
+//   //     if (obj.hasOwnProperty(newStr[i])) {
+//   //       score.push(obj[newStr[i]])
+//   //     }
+//   //   }
+//   //   return score
 // }
 // console.log(scoreboard('The score is four nil')) //, [4,0], "Should return: [4,0]");
 // console.log(scoreboard('new score: two three')) //, [2,3], "Should return: [2,3]");
 
 //+ # 202 The Office I - Outed
 // function outed(meet, boss) {
-//   const persons = Object.keys(meet).length
-//   let totalScore = 0
-//   for (const key in meet) {
-//     if (key === boss) {
-//       totalScore += meet[key] * 2
-//     } else {
-//       totalScore += meet[key]
-//     }
-//   }
-//   return totalScore / persons > 5 ? 'Nice Work Champ!' : 'Get Out Now!'
+//   const values = Object.values()
+//   const totalScore = values.reduce((a, b) => a + b, 0)
+
+//   return (totalScore + meet[boss]) / values.length > 5
+//     ? 'Nice Work Champ!'
+//     : 'Get Out Now!'
 // }
 
 // console.log(
@@ -87,7 +86,7 @@
 //   const away = []
 
 //   friends.forEach((arr) => {
-//     if (arr.status === 'online' && arr.lastActivity < 11) {
+//     if (arr.status === 'online' && arr.lastActivity <= 10) {
 //       online.push(arr.username)
 //     } else if (arr.status === 'offline') {
 //       offline.push(arr.username)
@@ -95,21 +94,44 @@
 //       away.push(arr.username)
 //     }
 //   })
-//   if (online.length > 0 && offline.length > 0 && away.length > 0) {
-//     return { online, offline, away }
-//   }
+//   // if (online.length > 0 && offline.length > 0 && away.length > 0) {
+//   //   return { online, offline, away }
+//   // }
 
-//   if (online.length > 0 && away.length > 0) {
-//     return { online, away }
-//   }
+//   // if (online.length > 0 && away.length > 0) {
+//   //   return { online, away }
+//   // }
 
-//   if (online.length > 0 && offline.length > 0) {
-//     return { online, offline }
-//   }
-//   if (offline.length > 0 && away.length > 0) {
-//     return { offline, away }
-//   }
-//   return {}
+//   // if (online.length > 0 && offline.length > 0) {
+//   //   return { online, offline }
+//   // }
+//   // if (offline.length > 0 && away.length > 0) {
+//   //   return { offline, away }
+//   // }
+//   // return {}
+
+//   const obj = { online, offline, away }
+//   // const filteredObj = {};
+
+//   // for(const [key, value] of Object.entries(obj)) {
+//   //   if(value.length > 0) {
+//   //     filteredObj[key] = value;
+//   //   }
+//   // }
+
+//   // for(const key in obj) {
+//   //   if(obj[key].length > 0) {
+//   //     filteredObj[key] = obj[key];
+//   //   }
+//   // }
+
+//   return Object.fromEntries(
+//     Object.entries(obj).filter(([k, v]) => v.length > 0)
+//   )
+
+//   // return (
+//   //   Object.entries(obj).filter(([k, v]) => v.length > 0) |> Object.fromEntries
+//   // )
 // }
 // // const a = {
 // //   online: ['David'],
@@ -123,34 +145,58 @@
 //     status: 'online',
 //     lastActivity: 10,
 //   },
-//   {
-//     username: 'Lucy',
-//     status: 'offline',
-//     lastActivity: 22,
-//   },
-//   {
-//     username: 'Bob',
-//     status: 'online',
-//     lastActivity: 104,
-//   },
+// {
+//   username: 'Lucy',
+//   status: 'offline',
+//   lastActivity: 22,
+// },
+// {
+//   username: 'Bob',
+//   status: 'online',
+//   lastActivity: 104,
+// },
 // ]
 // console.log(whosOnline(friends))
 
-// //+ #204 Where my anagrams at?
+//+ #204 Where my anagrams at?
 
 // function anagrams(word, words) {
-//   const newWords = []
-//   for (let str of words) {
-//     const newWord = word.split('').sort().join('')
-//     const newStr = str.split('').sort().join('')
-//     if (newStr === newWord) {
-//       newWords.push(str)
-//     }
-//   }
-//   return newWords
-// }
-// console.log(anagrams('racer', ['crazer', 'carer', 'racar', 'caers', 'racer']))
+//   // word.length === N  words.length === K → O(K × N × log(N))
+//   //   const newWords = []
+//   //   const newWord = word.split('').sort().join('') // O(N + N × log(N) + N) === O(N × log(N))
+//   //   for (let str of words) {
+//   //     // O(K)
+//   //     const newStr = str.split('').sort().join('') // O(N × log(N))
+//   //     if (newStr === newWord) {
+//   //       newWords.push(str)
+//   //     }
+//   //   }
 
+//   return words.filter((item) => isAnagrams(word, item))
+// }
+
+// function isAnagrams(w1, w2) {
+//   const obj = {}
+//   for (const letter of w1) {
+//     if (!(letter in obj)) {
+//       obj[letter] = 0
+//     }
+//     // obj[letter] ??= 0
+//     // obj[letter] = obj[letter] || 0
+//     obj[letter]++
+//   }
+//   for (const letter of w2) {
+//     obj[letter]--
+//   }
+//   return Object.values(obj).every((item) => item === 0)
+// }
+
+//console.log(isAnagrams('racer', 'rreac')) // { a: 1, c: 1, e: 1, r: 2 }
+
+//  O(K × N)
+
+// console.log(anagrams('racer', ['crazer', 'carer', 'racar', 'caers', 'racer']))
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // //+  #205 Make a function that does arithmetic!
 
 // function arithmetic(a, b, operator) {
@@ -168,39 +214,40 @@
 // console.log(arithmetic(5, 2, "multiply")) //, 10, "'multiply' should return a multiplied by b!");
 // console.log(arithmetic(8, 2, "divide")) //, 4, "'divide' should return a divided by b!");
 
-// //+ #206 Pluck
+//+ #206 Pluck
 
 // function pluck(objs, name) {
 //   const arr = []
-//   for (let i = 0; i < objs.length; i++) {
-//     arr.push(objs[i][name])
+//   for (const item of objs) {
+//     arr.push(item[name])
 //   }
 //   return arr
 // }
-
 // console.log(pluck([{ a: 1 }, { a: 2 }], 'a')) //, [1,2])
 // console.log(pluck([{ a: 1 }, { a: 2 }, { b: 2 }], 'a')) //, [1,2])
 
-// #207 Remove duplicate words   ------
+// //+ #207 Remove duplicate words
 
-function removeDuplicateWords(s) {
-  const arr = s.split(' ')
-  const newArr = []
-  for (let i = 0; i < s.length; i++) {
-    if (arr[i + 1] === arr[i]) {
-      newArr.push(arr[i])
-    }
-  }
-  return newArr.join(' ')
-}
+// //const removeDuplicateWords = s => [...new Set(s.split(' '))].join(' ') ?????
 
-console.log(
-  removeDuplicateWords(
-    'alpha beta beta gamma gamma gamma delta alpha beta beta gamma gamma gamma delta'
-  )
-) //, 'alpha beta gamma delta')
+// function removeDuplicateWords(s) {
+//   const arr = s.split(' ')
+//   const obj = {}
+//   for (const item of arr) {
+//     if (!(item in obj)) {
+//       obj[item] = 0
+//     }
+//   }
+//   return Object.keys(obj).join(' ')
+// }
 
-// // #208 Find the unique number -----------
+// console.log(
+//   removeDuplicateWords(
+//     'alpha beta beta gamma gamma gamma delta alpha beta beta gamma gamma gamma delta'
+//   )
+// ) //, 'alpha beta gamma delta')
+
+//+ #208 Find the unique number
 // function findUnique(numbers) {
 //   return numbers.find(
 //     (item) => numbers.indexOf(item) === numbers.lastIndexOf(item)
@@ -213,6 +260,21 @@ console.log(
 //       return numbers[i]
 //   }
 // }
+
+// function findUnique(numbers) {
+//   obj = {}
+//   for (const num of numbers) {
+//     if (!(num in obj)) {
+//       obj[num] = 1
+//     } else {
+//       obj[num]++
+//     }
+//   }
+//   for (const key in obj) {
+//     if (obj[key] === 1) return Number(key)
+//   }
+// }
+
 // console.log(findUnique([1, 4, 4, 5, 5, 3, 3, 2, 2])) //, 1);
 // console.log(findUnique([2, 2, 5, 5, 4, 3, 3, 1, 1])) //, 4);
 // console.log(findUnique([3, 5, 5, 4, 4, 3, 2, 2, 9])) //, 9);
@@ -227,7 +289,7 @@ console.log(
 //   })
 // }
 
-// //  #210 Convert Hash To An Array
+// //+  #210 Convert Hash To An Array
 // function convertHashToArray(hash) {
 //   return Object.entries(hash).sort()
 // }
@@ -239,7 +301,7 @@ console.log(
 // console.log(convertHashToArray({ product: 'CodeWars', powerLevelOver: 9000 })) //,[["powerLevelOver", 9000], ["product", "CodeWars"]]);
 // console.log(convertHashToArray({})) //,[]);
 
-//+ #211 Kebabize
+// //+ #211 Kebabize
 // function kebabize(str) {
 //   const newStr = str.replace(/[0-9]/g, '')
 //   let newLine = ''
@@ -257,22 +319,93 @@ console.log(
 // console.log(kebabize('MyCamelCasedString')) //, 'my-camel-cased-string');
 // console.log(kebabize('myCamelHas3Humps')) //, 'my-camel-has-humps')
 
-// #212   -----------------
+// #212  Word a10n (abbreviation) -----------------
 
 // function abbreviate(string) {
 //   if (string.includes('-')) {
 //     return string
 //       .split('-')
-//       .map((item) => item[0] + (item.length - 2) + item[item.length - 1])
+//       .map((item) =>
+//         item.length === 3
+//           ? item
+//           : item[0] + (item.length - 2) + item[item.length - 1]
+//       )
 //       .join('-')
 //   } else {
-//     return string[0] + (string.length - 2) + string[string.length - 1]
+//     return string.length === 3
+//       ? string
+//       : string[0] + (string.length - 2) + string[string.length - 1]
 //   }
 // }
 
 // console.log(abbreviate('internationalization')) //, "i18n");
-// console.log(abbreviate('accessibility')) //, "a11y");
+// console.log(abbreviate('acc')) //, "a11y");
 // console.log(
 //   abbreviate('You need, need not want, to complete this code-wars mission')
 // ) //, "You n2d, n2d not w2t, to c6e t2s c2e-w2s m5n");
 // console.log(abbreviate('elephant-ride')) //, "e6t-r2e");
+
+// #213 IP Validation     ---      //1.2.3.4 ???
+function isValidIP(str) {
+  const newStr = str.split('.')
+  if (str.includes(' ') || newStr.length !== 4) {
+    return false
+  }
+  return newStr.every((item) => item >= 0 && item <= 255)
+}
+console.log(isValidIP('12.255.56.1')) //, true)
+console.log(isValidIP('137.255.156.100')) //, true)
+console.log(isValidIP('12.34.56')) //, false);
+console.log(isValidIP('01.02.03.04')) //, false);
+console.log(isValidIP(' 1.2.3.4')) //, false);
+
+// #214 Super power frequency function
+function frequency(arr, options) {
+  obj = {}
+  for (const item of arr) {
+    if (!(item in obj)) {
+      obj[item] = 1
+    } else {
+      obj[item]++
+    }
+  }
+  return Object.entries(obj).map(([key, value]) => [+key, value])
+}
+console.log(frequency(['Peter', 'Anna', 'Rose', 'Peter', 'Peter', 'Anna'])) //, [["Anna", 2], ["Peter", 3], ["Rose", 1]]);
+console.log(frequency([1, 10, 12, 2, 1, 10, 2, 2, 1, 2])) //, [[1, 3], [2, 4], [10, 2], [12, 1]]);
+
+// #215 Partial Keys
+function partialKeys(obj) {}
+
+///№ 223 Sort Strings by Most Contiguous Vowels
+
+function sortStringsByVowels(strings) {
+  const str = strings.sort()
+
+  const sortArr = str.sort(function (a, b) {
+    return b.length - a.length
+  })
+  return sortArr
+}
+
+console.log(sortStringsByVowels(['aa', 'eee', 'oo', 'iiii'])) ///,["iiii","eee","aa","oo"]);
+console.log(sortStringsByVowels(['AIBRH', '', 'YOUNG', 'GREEEN'])) /// , ["GREEEN","AIBRH","YOUNG",""]);
+
+// #224 My Languages
+function myLanguages(results) {}
+
+console.log(myLanguages({ Java: 10, Ruby: 80, Python: 65 })) //, ["Ruby", "Python"])
+console.log(myLanguages({ Hindi: 60, Greek: 71, Dutch: 93 })) //, ["Dutch", "Greek", "Hindi"])
+console.log(myLanguages({ 'C++': 50, ASM: 10, Haskell: 20 })) //, [])
+
+//+ #226 Double Sort
+function dbSort(a) {
+  console.log(a.sort())
+  const num = a.filter((item) => typeof item === 'number').sort((a, b) => a - b)
+  const str = a.filter((item) => typeof item === 'string').sort()
+  return [...num, ...str]
+}
+
+console.log(dbSort([6, 2, 3, 4, 5])) //, [2, 3, 4, 5, 6]);
+console.log(dbSort(['Banana', 'Orange', 'Apple', 'Mango', 0, 2, 2])) //, [0,2,2,"Apple","Banana","Mango","Orange"]);
+console.log(dbSort(['C', 'W', 'W', 'W', 1, 2, 0])) //, [0,1,2,"C","W","W","W"]);
