@@ -359,7 +359,7 @@ console.log(isValidIP('12.34.56')) //, false);
 console.log(isValidIP('01.02.03.04')) //, false);
 console.log(isValidIP(' 1.2.3.4')) //, false);
 
-// #214 Super power frequency function
+// #214 Super power frequency function  ------
 function frequency(arr, options) {
   obj = {}
   for (const item of arr) {
@@ -369,15 +369,89 @@ function frequency(arr, options) {
       obj[item]++
     }
   }
-  return Object.entries(obj).map(([key, value]) => [+key, value])
+  return Object.entries(obj)
 }
 console.log(frequency(['Peter', 'Anna', 'Rose', 'Peter', 'Peter', 'Anna'])) //, [["Anna", 2], ["Peter", 3], ["Rose", 1]]);
 console.log(frequency([1, 10, 12, 2, 1, 10, 2, 2, 1, 2])) //, [[1, 3], [2, 4], [10, 2], [12, 1]]);
 
-// #215 Partial Keys
+// #215 Partial Keys -----
 function partialKeys(obj) {}
 
-///№ 223 Sort Strings by Most Contiguous Vowels
+// #216 From..To..Series #2: from arr1 to arr2. Find the most same sum value of pairs  -----
+function findPair(arr1, arr2) {
+  const newArr = []
+  for (let i = 0; i < arr1.length; i++) {
+    newArr.push(arr1[i] + arr2[i])
+  }
+  console.log(newArr)
+}
+
+console.log(findPair([1, 2, 3, 4, 5], [9, 8, 0, 0, 0])) // , [[1,9],[2,8]])
+console.log(findPair([1, 2, 3, 4, 5], [0, 0, 0, 0, 0])) // , [])
+console.log(findPair([1, 2, 3, 4, 5], [5, 4, 3, 2, 1])) // , [[1,5],[2,4],[3,3],[4,2],[5,1]])
+
+// #217  Evaluating prefix Polish notation  -----
+
+function calculate(expression) {
+  return Number(expression)
+}
+
+console.log(calculate('+ 3 5')) //, 8);
+console.log(calculate('* + 2 2 3')) //, 12);
+console.log(calculate('/ + 3 5 * 2 2')) //, 2);
+
+// #218 Convert A Hex String To RGB
+
+function hexStringToRGB(hexString) {}
+
+console.log(hexStringToRGB('#FF9933')) //, {r:255, g:153, b:51});
+
+// #219 Run-length encoding
+
+function runLengthEncoding(str) {
+  obj = {}
+  let j = 1
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] in obj) {
+      obj[j++]
+    } else {
+      obj[j] = str[i]
+    }
+  }
+  return obj
+}
+
+console.log(runLengthEncoding('abc')) //, [[1,'a'],[1,'b'],[1,'c']]);
+console.log(runLengthEncoding('aab')) //, [[2,'a'],[1,'b']]);
+
+// #220  Is a number prime?
+
+function isPrime(num) {
+  //TODO
+}
+
+console.log(isPrime(0)) //,  false, "0 is not prime");
+console.log(isPrime(1)) //,  false, "1 is not prime");
+console.log(isPrime(2)) //,  true, "2 is prime");
+console.log(isPrime(73)) //, true, "73 is prime");
+console.log(isPrime(75)) //, false, "75 is not prime");
+
+// 221  Sum of Digits / Digital Root
+
+function digital_root(n) {
+  // ...
+}
+
+console.log(digital_root(16)) //, 7 )
+console.log(digital_root(456)) //, 6 )
+
+// #222  Alphabetized
+
+function alphabetized(s) {}
+
+console.log(alphabetized('The Holy Bible')) //, 'BbeehHilloTy')
+
+///№ 223 Sort Strings by Most Contiguous Vowels -------
 
 function sortStringsByVowels(strings) {
   const str = strings.sort()
@@ -391,21 +465,29 @@ function sortStringsByVowels(strings) {
 console.log(sortStringsByVowels(['aa', 'eee', 'oo', 'iiii'])) ///,["iiii","eee","aa","oo"]);
 console.log(sortStringsByVowels(['AIBRH', '', 'YOUNG', 'GREEEN'])) /// , ["GREEEN","AIBRH","YOUNG",""]);
 
-// #224 My Languages
-function myLanguages(results) {}
+// //+ #224 My Languages
+// function myLanguages(results) {
+//   const arr = []
+//   for (const key in results) {
+//     if (results[key] >= 60) {
+//       arr.push(key)
+//     }
+//   }
+//   return arr.sort((a, b) => results[b] - results[a])
+// }
 
-console.log(myLanguages({ Java: 10, Ruby: 80, Python: 65 })) //, ["Ruby", "Python"])
-console.log(myLanguages({ Hindi: 60, Greek: 71, Dutch: 93 })) //, ["Dutch", "Greek", "Hindi"])
-console.log(myLanguages({ 'C++': 50, ASM: 10, Haskell: 20 })) //, [])
+// console.log(myLanguages({ Java: 10, Ruby: 80, Python: 65 })) //, ["Ruby", "Python"])
+// console.log(myLanguages({ Hindi: 60, Greek: 71, Dutch: 93 })) //, ["Dutch", "Greek", "Hindi"])
+// console.log(myLanguages({ 'C++': 50, ASM: 10, Haskell: 20 })) //, [])
 
-//+ #226 Double Sort
-function dbSort(a) {
-  console.log(a.sort())
-  const num = a.filter((item) => typeof item === 'number').sort((a, b) => a - b)
-  const str = a.filter((item) => typeof item === 'string').sort()
-  return [...num, ...str]
-}
+// //+ #226 Double Sort
+// function dbSort(a) {
+//   console.log(a.sort())
+//   const num = a.filter((item) => typeof item === 'number').sort((a, b) => a - b)
+//   const str = a.filter((item) => typeof item === 'string').sort()
+//   return [...num, ...str]
+// }
 
-console.log(dbSort([6, 2, 3, 4, 5])) //, [2, 3, 4, 5, 6]);
-console.log(dbSort(['Banana', 'Orange', 'Apple', 'Mango', 0, 2, 2])) //, [0,2,2,"Apple","Banana","Mango","Orange"]);
-console.log(dbSort(['C', 'W', 'W', 'W', 1, 2, 0])) //, [0,1,2,"C","W","W","W"]);
+// console.log(dbSort([6, 2, 3, 4, 5])) //, [2, 3, 4, 5, 6]);
+// console.log(dbSort(['Banana', 'Orange', 'Apple', 'Mango', 0, 2, 2])) //, [0,2,2,"Apple","Banana","Mango","Orange"]);
+// console.log(dbSort(['C', 'W', 'W', 'W', 1, 2, 0])) //, [0,1,2,"C","W","W","W"]);
