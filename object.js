@@ -427,7 +427,8 @@ console.log(runLengthEncoding('aab')) //, [[2,'a'],[1,'b']]);
 // #220  Is a number prime?
 
 function isPrime(num) {
-  //TODO
+  if (num > 1 || num % 2 || num % 3) return true
+  else false
 }
 
 console.log(isPrime(0)) //,  false, "0 is not prime");
@@ -439,7 +440,15 @@ console.log(isPrime(75)) //, false, "75 is not prime");
 // 221  Sum of Digits / Digital Root
 
 function digital_root(n) {
-  // ...
+  let a = String(n)
+    .split('')
+    .map(Number)
+    .reduce((acc, num) => acc + num)
+  if (a > 9) {
+    digital_root(n)
+  } else {
+    return a
+  }
 }
 
 console.log(digital_root(16)) //, 7 )
@@ -447,7 +456,12 @@ console.log(digital_root(456)) //, 6 )
 
 // #222  Alphabetized
 
-function alphabetized(s) {}
+function alphabetized(s) {
+  const a = s.replace(/\s/g, '')
+  const b = a.split('').sort((a, b) => a.toLowerCase() - b.toLowerCase())
+  console.log(a)
+  console.log(b)
+}
 
 console.log(alphabetized('The Holy Bible')) //, 'BbeehHilloTy')
 
