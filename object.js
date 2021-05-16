@@ -197,9 +197,18 @@
 
 // console.log(anagrams('racer', ['crazer', 'carer', 'racar', 'caers', 'racer']))
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// //+  #205 Make a function that does arithmetic!
+//+  #205 Make a function that does arithmetic!
+
+// const fn = {
+//   add: (a, b) => a + b,
+//   subtract: (a, b) => a - b,
+//   multiply: (a, b) => a * b,
+//   divide: (a, b) => a / b,
+// }
 
 // function arithmetic(a, b, operator) {
+//   return fn[operator](a, b)
+
 //   switch (operator) {
 //     case 'add':
 //       return a + b
@@ -211,8 +220,8 @@
 //       return a / b
 //   }
 // }
-// console.log(arithmetic(5, 2, "multiply")) //, 10, "'multiply' should return a multiplied by b!");
-// console.log(arithmetic(8, 2, "divide")) //, 4, "'divide' should return a divided by b!");
+// console.log(arithmetic(5, 2, 'multiply')) //, 10, "'multiply' should return a multiplied by b!");
+// console.log(arithmetic(8, 2, 'divide')) //, 4, "'divide' should return a divided by b!");
 
 //+ #206 Pluck
 
@@ -221,33 +230,40 @@
 //   for (const item of objs) {
 //     arr.push(item[name])
 //   }
-//   return arr
+//   return objs.map(item => item[name])
 // }
 // console.log(pluck([{ a: 1 }, { a: 2 }], 'a')) //, [1,2])
 // console.log(pluck([{ a: 1 }, { a: 2 }, { b: 2 }], 'a')) //, [1,2])
 
-// //+ #207 Remove duplicate words
+//+ #207 Remove duplicate words
 
-// //const removeDuplicateWords = s => [...new Set(s.split(' '))].join(' ') ?????
+//const removeDuplicateWords = s => [...new Set(s.split(' '))].join(' ') ?????
+
+// https://twitter.com/maxsinyakov/following
+// https://www.youtube.com/watch?v=LYbtR9vQkiI
 
 // function removeDuplicateWords(s) {
 //   const arr = s.split(' ')
-//   const obj = {}
-//   for (const item of arr) {
-//     if (!(item in obj)) {
-//       obj[item] = 0
-//     }
-//   }
-//   return Object.keys(obj).join(' ')
+//   // const obj = {}
+//   // const result = []
+//   const set = new Set(arr)
+//   // for (const item of arr) {
+//   // if (!(item in obj)) {
+//   //   obj[item] = 0
+//   //   result.push(item)
+//   // }
+//   // set.add(item)
+//   // }
+//   return Array.from(set).join('') //Object.keys(obj).join(' ')
 // }
 
 // console.log(
 //   removeDuplicateWords(
-//     'alpha beta beta gamma gamma gamma delta alpha beta beta gamma gamma gamma delta'
+//     'alpha beta beta gamma gamma gamma delta alpha beta beta gamma gamma gamma delta 123'
 //   )
 // ) //, 'alpha beta gamma delta')
 
-//+ #208 Find the unique number
+// //+ #208 Find the unique number
 // function findUnique(numbers) {
 //   return numbers.find(
 //     (item) => numbers.indexOf(item) === numbers.lastIndexOf(item)
@@ -279,19 +295,18 @@
 // console.log(findUnique([2, 2, 5, 5, 4, 3, 3, 1, 1])) //, 4);
 // console.log(findUnique([3, 5, 5, 4, 4, 3, 2, 2, 9])) //, 9);
 
-//+ #209 Coding Meetup #2 - Higher-Order Functions Series - Greet developers
+// //+ #209 Coding Meetup #2 - Higher-Order Functions Series - Greet developers
 // function greetDevelopers(list) {
-//   return list.map((item) => {
-//     return {
-//       ...item,
-//       greeting: `Hi ${item.firstName}, what do you like the most about ${item.language}?`,
-//     }
-//   })
+//   return list.map((item) => ({
+//     ...item,
+//     greeting: `Hi ${item.firstName}, what do you like the most about ${item.language}?`,
+//   }))
 // }
 
 // //+  #210 Convert Hash To An Array
 // function convertHashToArray(hash) {
-//   return Object.entries(hash).sort()
+//   return Object.entries(hash).sort((a, b) => (a[0] < b[0] ? -1 : 1))
+//   return Object.keys(hash).sort().map(k => [k, hash[k]]);
 // }
 // console.log(convertHashToArray({ name: 'Jeremy' })) //,[["name", "Jeremy"]]);
 // console.log(convertHashToArray({ name: 'Jeremy', age: 24 })) //,[["age", 24], ["name", "Jeremy"]]);
@@ -301,19 +316,41 @@
 // console.log(convertHashToArray({ product: 'CodeWars', powerLevelOver: 9000 })) //,[["powerLevelOver", 9000], ["product", "CodeWars"]]);
 // console.log(convertHashToArray({})) //,[]);
 
-// //+ #211 Kebabize
-// function kebabize(str) {
-//   const newStr = str.replace(/[0-9]/g, '')
-//   let newLine = ''
+// console.log(['a,b,c,d', 'a,b,c'].sort())
 
-//   for (let i = 0; i < newStr.length; i++) {
-//     if (newStr[i] === newStr[i].toUpperCase()) {
-//       newLine += '-' + newStr[i].toLowerCase()
-//     } else {
-//       newLine += newStr[i]
-//     }
-//   }
-//   return newLine[0] === '-' ? newLine.slice(1) : newLine
+// const o = {
+//   'a,b,c,d': 'asdfghj',
+//   'a,b,c': 'qwertyui',
+// }
+
+// console.log(convertHashToArray(o))
+
+// const x = ['лиса', 'волк', 'ёжик', 'заяц']
+
+// console.log(x.sort((a, b) => a.localeCompare(b, 'ru')))
+
+// [ [ 'a,b,c,d', 'asdfghj' ], [ 'a,b,c', 'qwertyui' ] ]
+// 'a,b,c,d,asdfghj' 'a,b,c,qwertyui'
+// [1, 2, 3].toString() === "1,2,3"
+
+//+ #211 Kebabize
+// function kebabize(str) {
+//   // const newStr = str.replace(/[0-9]/g, '')
+//   // let newLine = ''
+
+//   // for (let i = 0; i < newStr.length; i++) {
+//   //   if (newStr[i] === newStr[i].toUpperCase()) {
+//   //     newLine += '-' + newStr[i].toLowerCase()
+//   //   } else {
+//   //     newLine += newStr[i]
+//   //   }
+//   // }
+//   // return newLine[0] === '-' ? newLine.slice(1) : newLine
+
+//   return str
+//     .replace(/[^a-z]/gi, '')
+//     .replace(/[A-Z]/g, (x) => '-' + x.toLowerCase())
+//     .replace(/^-/, '')
 // }
 
 // console.log(kebabize('MyCamelCasedString')) //, 'my-camel-cased-string');
@@ -322,29 +359,40 @@
 // #212  Word a10n (abbreviation) -----------------
 
 // function abbreviate(string) {
-//   if (string.includes('-')) {
-//     return string
-//       .split('-')
-//       .map((item) =>
-//         item.length === 3
-//           ? item
-//           : item[0] + (item.length - 2) + item[item.length - 1]
-//       )
-//       .join('-')
-//   } else {
-//     return string.length === 3
-//       ? string
-//       : string[0] + (string.length - 2) + string[string.length - 1]
-//   }
+//   // if (string.includes('-')) {
+//   //   return string
+//   //     .split('-')
+//   //     .map((item) =>
+//   //       item.length === 3
+//   //         ? item
+//   //         : item[0] + (item.length - 2) + item[item.length - 1]
+//   //     )
+//   //     .join('-')
+//   // } else {
+//   //   return string.length === 3
+//   //     ? string
+//   //     : string[0] + (string.length - 2) + string[string.length - 1]
+//   // }
+
+//   // return string.replace(/[a-z]+/gi, (string) =>
+//   //   string.length < 4
+//   //     ? string
+//   //     : string[0] + (string.length - 2) + string[string.length - 1]
+//   // )
+
+//   return string.replace(
+//     /[a-z]{4,}/gi,
+//     (string) => string[0] + (string.length - 2) + string[string.length - 1]
+//   )
 // }
 
-// console.log(abbreviate('internationalization')) //, "i18n");
-// console.log(abbreviate('acc')) //, "a11y");
+// // console.log(abbreviate('internationalization')) //, "i18n");
+// // console.log(abbreviate('acc')) //, "a11y");
 // console.log(
 //   abbreviate('You need, need not want, to complete this code-wars mission')
 // ) //, "You n2d, n2d not w2t, to c6e t2s c2e-w2s m5n");
 // console.log(abbreviate('elephant-ride')) //, "e6t-r2e");
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // #213 IP Validation     ---      //1.2.3.4 ???
 function isValidIP(str) {
   const newStr = str.split('.')
@@ -359,7 +407,7 @@ console.log(isValidIP('12.34.56')) //, false);
 console.log(isValidIP('01.02.03.04')) //, false);
 console.log(isValidIP(' 1.2.3.4')) //, false);
 
-// #214 Super power frequency function  ------
+// #214 Super power frequency function  ------ Map!!!!
 function frequency(arr, options) {
   obj = {}
   for (const item of arr) {
@@ -374,134 +422,133 @@ function frequency(arr, options) {
 console.log(frequency(['Peter', 'Anna', 'Rose', 'Peter', 'Peter', 'Anna'])) //, [["Anna", 2], ["Peter", 3], ["Rose", 1]]);
 console.log(frequency([1, 10, 12, 2, 1, 10, 2, 2, 1, 2])) //, [[1, 3], [2, 4], [10, 2], [12, 1]]);
 
-// #215 Partial Keys -----
-function partialKeys(obj) {}
+// // #215 --------Partial Keys -----
 
-// #216 From..To..Series #2: from arr1 to arr2. Find the most same sum value of pairs  -----
-function findPair(arr1, arr2) {
-  const newArr = []
-  for (let i = 0; i < arr1.length; i++) {
-    newArr.push(arr1[i] + arr2[i])
-  }
-  console.log(newArr)
-}
+// // #216 From..To..Series #2: from arr1 to arr2. Find the most same sum value of pairs  -----
+// function findPair(arr1, arr2) {
+//   const newArr = []
+//   for (let i = 0; i < arr1.length; i++) {
+//     newArr.push(arr1[i] + arr2[i])
+//   }
+//   console.log(newArr)
+// }
 
-console.log(findPair([1, 2, 3, 4, 5], [9, 8, 0, 0, 0])) // , [[1,9],[2,8]])
-console.log(findPair([1, 2, 3, 4, 5], [0, 0, 0, 0, 0])) // , [])
-console.log(findPair([1, 2, 3, 4, 5], [5, 4, 3, 2, 1])) // , [[1,5],[2,4],[3,3],[4,2],[5,1]])
+// console.log(findPair([1, 2, 3, 4, 5], [9, 8, 0, 0, 0])) // , [[1,9],[2,8]])
+// console.log(findPair([1, 2, 3, 4, 5], [0, 0, 0, 0, 0])) // , [])
+// console.log(findPair([1, 2, 3, 4, 5], [5, 4, 3, 2, 1])) // , [[1,5],[2,4],[3,3],[4,2],[5,1]])
 
-// #217  Evaluating prefix Polish notation  -----
+// // #217  Evaluating prefix Polish notation  -----
 
-function calculate(expression) {
-  return Number(expression)
-}
+// function calculate(expression) {
+//   return Number(expression)
+// }
 
-console.log(calculate('+ 3 5')) //, 8);
-console.log(calculate('* + 2 2 3')) //, 12);
-console.log(calculate('/ + 3 5 * 2 2')) //, 2);
+// console.log(calculate('+ 3 5')) //, 8);
+// console.log(calculate('* + 2 2 3')) //, 12);
+// console.log(calculate('/ + 3 5 * 2 2')) //, 2);
 
-// #218 Convert A Hex String To RGB
+// // #218 Convert A Hex String To RGB
 
-function hexStringToRGB(hexString) {}
+// function hexStringToRGB(hexString) {}
 
-console.log(hexStringToRGB('#FF9933')) //, {r:255, g:153, b:51});
+// console.log(hexStringToRGB('#FF9933')) //, {r:255, g:153, b:51});
 
-// #219 Run-length encoding
+// // #219 Run-length encoding
 
-function runLengthEncoding(str) {
-  obj = {}
-  let j = 1
-  for (let i = 0; i < str.length; i++) {
-    if (str[i] in obj) {
-      obj[j++]
-    } else {
-      obj[j] = str[i]
-    }
-  }
-  return obj
-}
-
-console.log(runLengthEncoding('abc')) //, [[1,'a'],[1,'b'],[1,'c']]);
-console.log(runLengthEncoding('aab')) //, [[2,'a'],[1,'b']]);
-
-// #220  Is a number prime?
-
-function isPrime(num) {
-  if (num > 1 || num % 2 || num % 3) return true
-  else false
-}
-
-console.log(isPrime(0)) //,  false, "0 is not prime");
-console.log(isPrime(1)) //,  false, "1 is not prime");
-console.log(isPrime(2)) //,  true, "2 is prime");
-console.log(isPrime(73)) //, true, "73 is prime");
-console.log(isPrime(75)) //, false, "75 is not prime");
-
-// 221  Sum of Digits / Digital Root
-
-function digital_root(n) {
-  let a = String(n)
-    .split('')
-    .map(Number)
-    .reduce((acc, num) => acc + num)
-  if (a > 9) {
-    digital_root(n)
-  } else {
-    return a
-  }
-}
-
-console.log(digital_root(16)) //, 7 )
-console.log(digital_root(456)) //, 6 )
-
-// #222  Alphabetized
-
-function alphabetized(s) {
-  const a = s.replace(/\s/g, '')
-  const b = a.split('').sort((a, b) => a.toLowerCase() - b.toLowerCase())
-  console.log(a)
-  console.log(b)
-}
-
-console.log(alphabetized('The Holy Bible')) //, 'BbeehHilloTy')
-
-///№ 223 Sort Strings by Most Contiguous Vowels -------
-
-function sortStringsByVowels(strings) {
-  const str = strings.sort()
-
-  const sortArr = str.sort(function (a, b) {
-    return b.length - a.length
-  })
-  return sortArr
-}
-
-console.log(sortStringsByVowels(['aa', 'eee', 'oo', 'iiii'])) ///,["iiii","eee","aa","oo"]);
-console.log(sortStringsByVowels(['AIBRH', '', 'YOUNG', 'GREEEN'])) /// , ["GREEEN","AIBRH","YOUNG",""]);
-
-// //+ #224 My Languages
-// function myLanguages(results) {
-//   const arr = []
-//   for (const key in results) {
-//     if (results[key] >= 60) {
-//       arr.push(key)
+// function runLengthEncoding(str) {
+//   obj = {}
+//   let j = 1
+//   for (let i = 0; i < str.length; i++) {
+//     if (str[i] in obj) {
+//       obj[j++]
+//     } else {
+//       obj[j] = str[i]
 //     }
 //   }
-//   return arr.sort((a, b) => results[b] - results[a])
+//   return obj
 // }
 
-// console.log(myLanguages({ Java: 10, Ruby: 80, Python: 65 })) //, ["Ruby", "Python"])
-// console.log(myLanguages({ Hindi: 60, Greek: 71, Dutch: 93 })) //, ["Dutch", "Greek", "Hindi"])
-// console.log(myLanguages({ 'C++': 50, ASM: 10, Haskell: 20 })) //, [])
+// console.log(runLengthEncoding('abc')) //, [[1,'a'],[1,'b'],[1,'c']]);
+// console.log(runLengthEncoding('aab')) //, [[2,'a'],[1,'b']]);
 
-// //+ #226 Double Sort
-// function dbSort(a) {
-//   console.log(a.sort())
-//   const num = a.filter((item) => typeof item === 'number').sort((a, b) => a - b)
-//   const str = a.filter((item) => typeof item === 'string').sort()
-//   return [...num, ...str]
+// // #220  Is a number prime?
+
+// function isPrime(num) {
+//   if (num > 1 || num % 2 || num % 3) return true
+//   else false
 // }
 
-// console.log(dbSort([6, 2, 3, 4, 5])) //, [2, 3, 4, 5, 6]);
-// console.log(dbSort(['Banana', 'Orange', 'Apple', 'Mango', 0, 2, 2])) //, [0,2,2,"Apple","Banana","Mango","Orange"]);
-// console.log(dbSort(['C', 'W', 'W', 'W', 1, 2, 0])) //, [0,1,2,"C","W","W","W"]);
+// console.log(isPrime(0)) //,  false, "0 is not prime");
+// console.log(isPrime(1)) //,  false, "1 is not prime");
+// console.log(isPrime(2)) //,  true, "2 is prime");
+// console.log(isPrime(73)) //, true, "73 is prime");
+// console.log(isPrime(75)) //, false, "75 is not prime");
+
+// // 221  Sum of Digits / Digital Root
+
+// function digital_root(n) {
+//   let a = String(n)
+//     .split('')
+//     .map(Number)
+//     .reduce((acc, num) => acc + num)
+//   if (a > 9) {
+//     digital_root(n)
+//   } else {
+//     return a
+//   }
+// }
+
+// console.log(digital_root(16)) //, 7 )
+// console.log(digital_root(456)) //, 6 )
+
+// // #222  Alphabetized
+
+// function alphabetized(s) {
+//   const a = s.replace(/\s/g, '')
+//   const b = a.split('').sort((a, b) => a.toLowerCase() - b.toLowerCase())
+//   console.log(a)
+//   console.log(b)
+// }
+
+// console.log(alphabetized('The Holy Bible')) //, 'BbeehHilloTy')
+
+// ///№ 223 Sort Strings by Most Contiguous Vowels -------
+
+// function sortStringsByVowels(strings) {
+//   const str = strings.sort()
+
+//   const sortArr = str.sort(function (a, b) {
+//     return b.length - a.length
+//   })
+//   return sortArr
+// }
+
+// console.log(sortStringsByVowels(['aa', 'eee', 'oo', 'iiii'])) ///,["iiii","eee","aa","oo"]);
+// console.log(sortStringsByVowels(['AIBRH', '', 'YOUNG', 'GREEEN'])) /// , ["GREEEN","AIBRH","YOUNG",""]);
+
+// // //+ #224 My Languages
+// // function myLanguages(results) {
+// //   const arr = []
+// //   for (const key in results) {
+// //     if (results[key] >= 60) {
+// //       arr.push(key)
+// //     }
+// //   }
+// //   return arr.sort((a, b) => results[b] - results[a])
+// // }
+
+// // console.log(myLanguages({ Java: 10, Ruby: 80, Python: 65 })) //, ["Ruby", "Python"])
+// // console.log(myLanguages({ Hindi: 60, Greek: 71, Dutch: 93 })) //, ["Dutch", "Greek", "Hindi"])
+// // console.log(myLanguages({ 'C++': 50, ASM: 10, Haskell: 20 })) //, [])
+
+// // //+ #226 Double Sort
+// // function dbSort(a) {
+// //   console.log(a.sort())
+// //   const num = a.filter((item) => typeof item === 'number').sort((a, b) => a - b)
+// //   const str = a.filter((item) => typeof item === 'string').sort()
+// //   return [...num, ...str]
+// // }
+
+// // console.log(dbSort([6, 2, 3, 4, 5])) //, [2, 3, 4, 5, 6]);
+// // console.log(dbSort(['Banana', 'Orange', 'Apple', 'Mango', 0, 2, 2])) //, [0,2,2,"Apple","Banana","Mango","Orange"]);
+// // console.log(dbSort(['C', 'W', 'W', 'W', 1, 2, 0])) //, [0,1,2,"C","W","W","W"]);
