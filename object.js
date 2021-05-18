@@ -393,13 +393,15 @@
 // ) //, "You n2d, n2d not w2t, to c6e t2s c2e-w2s m5n");
 // console.log(abbreviate('elephant-ride')) //, "e6t-r2e");
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// #213 IP Validation     ---      //1.2.3.4 ???
+//+ #213 IP Validation
 function isValidIP(str) {
   const newStr = str.split('.')
   if (str.includes(' ') || newStr.length !== 4) {
     return false
   }
-  return newStr.every((item) => item >= 0 && item <= 255)
+  return newStr.every(
+    (item) => String(Number(item)) === item && item >= 0 && item <= 255
+  )
 }
 console.log(isValidIP('12.255.56.1')) //, true)
 console.log(isValidIP('137.255.156.100')) //, true)
@@ -408,123 +410,152 @@ console.log(isValidIP('01.02.03.04')) //, false);
 console.log(isValidIP(' 1.2.3.4')) //, false);
 
 // #214 Super power frequency function  ------ Map!!!!
-function frequency(arr, options) {
-  obj = {}
-  for (const item of arr) {
-    if (!(item in obj)) {
-      obj[item] = 1
-    } else {
-      obj[item]++
+function frequency(arr, options = {}) {
+  const { criteria = (x) => x, compareTo = (a, b) => (a < b ? -1 : 1) } =
+    options
+  const counter = new Map()
+  for (const key of arr.map(criteria)) {
+    if (!counter.has(key)) {
+      counter.set(key, 0)
     }
+    const current = counter.get(key)
+    counter.set(key, current + 1)
   }
-  return Object.entries(obj)
+
+  return Array.from(counter).sort((a, b) => compareTo(a[0], b[0], a[1], b[1]))
 }
 console.log(frequency(['Peter', 'Anna', 'Rose', 'Peter', 'Peter', 'Anna'])) //, [["Anna", 2], ["Peter", 3], ["Rose", 1]]);
 console.log(frequency([1, 10, 12, 2, 1, 10, 2, 2, 1, 2])) //, [[1, 3], [2, 4], [10, 2], [12, 1]]);
 
-// // #215 --------Partial Keys -----
+// #216 From..To..Series #2: from arr1 to arr2. Find the most same sum value of pairs  -----
+function findPair(arr1, arr2) {
+  const newArr = []
+  for (let i = 0; i < arr1.length; i++) {
+    newArr.push(arr1[i] + arr2[i])
+  }
+  console.log(newArr)
+}
 
-// // #216 From..To..Series #2: from arr1 to arr2. Find the most same sum value of pairs  -----
-// function findPair(arr1, arr2) {
-//   const newArr = []
-//   for (let i = 0; i < arr1.length; i++) {
-//     newArr.push(arr1[i] + arr2[i])
-//   }
-//   console.log(newArr)
-// }
+console.log(findPair([1, 2, 3, 4, 5], [9, 8, 0, 0, 0])) // , [[1,9],[2,8]])
+console.log(findPair([1, 2, 3, 4, 5], [0, 0, 0, 0, 0])) // , [])
+console.log(findPair([1, 2, 3, 4, 5], [5, 4, 3, 2, 1])) // , [[1,5],[2,4],[3,3],[4,2],[5,1]])
 
-// console.log(findPair([1, 2, 3, 4, 5], [9, 8, 0, 0, 0])) // , [[1,9],[2,8]])
-// console.log(findPair([1, 2, 3, 4, 5], [0, 0, 0, 0, 0])) // , [])
-// console.log(findPair([1, 2, 3, 4, 5], [5, 4, 3, 2, 1])) // , [[1,5],[2,4],[3,3],[4,2],[5,1]])
-
-// // #217  Evaluating prefix Polish notation  -----
+// //+ #217  Evaluating prefix Polish notation
 
 // function calculate(expression) {
-//   return Number(expression)
+//   const arr = expression.split(' ')
+//   const fn = {
+//     '+': (a, b) => a + b,
+//     '-': (a, b) => a - b,
+//     '*': (a, b) => a * b,
+//     '/': (a, b) => a / b,
+//   }
+//   for (let i = arr.length - 1; i >= 0; i--) {
+//     if (arr[i] in fn) {
+//       arr.splice(i, 3, fn[arr[i]](+arr[i + 1], +arr[i + 2]))
+//     }
+//   }
+//   return Number(arr[0])
 // }
 
 // console.log(calculate('+ 3 5')) //, 8);
 // console.log(calculate('* + 2 2 3')) //, 12);
 // console.log(calculate('/ + 3 5 * 2 2')) //, 2);
 
-// // #218 Convert A Hex String To RGB
+// //+ #218 Convert A Hex String To RGB
 
-// function hexStringToRGB(hexString) {}
+// function hexStringToRGB(hexString) {
+//   return {
+//     r: parseInt(hexString.slice(1, 3), 16),
+//     g: parseInt(hexString.slice(3, 5), 16),
+//     b: parseInt(hexString.slice(5, 7), 16),
+//   }
+// }
 
 // console.log(hexStringToRGB('#FF9933')) //, {r:255, g:153, b:51});
 
-// // #219 Run-length encoding
+//+ #219 Run-length encoding
 
 // function runLengthEncoding(str) {
-//   obj = {}
-//   let j = 1
+//   const arr = []
+//   let count = 1
 //   for (let i = 0; i < str.length; i++) {
-//     if (str[i] in obj) {
-//       obj[j++]
+//     if (str[i] === str[i + 1]) {
+//       count++
 //     } else {
-//       obj[j] = str[i]
+//       arr.push([count, str[i]])
+//       count = 1
 //     }
 //   }
-//   return obj
+//   return arr
 // }
 
 // console.log(runLengthEncoding('abc')) //, [[1,'a'],[1,'b'],[1,'c']]);
 // console.log(runLengthEncoding('aab')) //, [[2,'a'],[1,'b']]);
 
-// // #220  Is a number prime?
+// // #220  Is a number prime?  -------
 
 // function isPrime(num) {
-//   if (num > 1 || num % 2 || num % 3) return true
-//   else false
+//   if (num < 2) {
+//     return false
+//   }
+//   if (num <= 3) {
+//     return true
+//   }
+//   if (num < 2 || num % 2 == 0 || num % 3 == 0) {
+//     return false
+//   } else {
+//     return true
+//   }
 // }
 
+// console.log(isPrime(3)) //,  false, "0 is not prime");
 // console.log(isPrime(0)) //,  false, "0 is not prime");
 // console.log(isPrime(1)) //,  false, "1 is not prime");
 // console.log(isPrime(2)) //,  true, "2 is prime");
 // console.log(isPrime(73)) //, true, "73 is prime");
 // console.log(isPrime(75)) //, false, "75 is not prime");
 
-// // 221  Sum of Digits / Digital Root
+// //+ 221  Sum of Digits / Digital Root
 
 // function digital_root(n) {
 //   let a = String(n)
 //     .split('')
 //     .map(Number)
-//     .reduce((acc, num) => acc + num)
-//   if (a > 9) {
-//     digital_root(n)
-//   } else {
-//     return a
+//     .reduce((acc, num) => acc + num, 0)
+//   while (a > 9) {
+//     a = String(a)
+//       .split('')
+//       .map(Number)
+//       .reduce((acc, num) => acc + num, 0)
 //   }
+//   return a
 // }
 
 // console.log(digital_root(16)) //, 7 )
 // console.log(digital_root(456)) //, 6 )
 
-// // #222  Alphabetized
+// // #222  Alphabetized  ------------------
 
 // function alphabetized(s) {
 //   const a = s.replace(/\s/g, '')
-//   const b = a.split('').sort((a, b) => a.toLowerCase() - b.toLowerCase())
-//   console.log(a)
-//   console.log(b)
+//   const b = a.split('').sort()
+//   return b.join('')
 // }
 
 // console.log(alphabetized('The Holy Bible')) //, 'BbeehHilloTy')
 
-// ///№ 223 Sort Strings by Most Contiguous Vowels -------
+///№ 223 Sort Strings by Most Contiguous Vowels -------
 
-// function sortStringsByVowels(strings) {
-//   const str = strings.sort()
+function sortStringsByVowels(strings) {
+  const str = strings.sort()
 
-//   const sortArr = str.sort(function (a, b) {
-//     return b.length - a.length
-//   })
-//   return sortArr
-// }
+  const sortArr = str.sort((a, b) => b.length - a.length)
+  return sortArr
+}
 
-// console.log(sortStringsByVowels(['aa', 'eee', 'oo', 'iiii'])) ///,["iiii","eee","aa","oo"]);
-// console.log(sortStringsByVowels(['AIBRH', '', 'YOUNG', 'GREEEN'])) /// , ["GREEEN","AIBRH","YOUNG",""]);
+console.log(sortStringsByVowels(['aa', 'eee', 'oo', 'iiii'])) ///,["iiii","eee","aa","oo"]);
+console.log(sortStringsByVowels(['AIBRH', '', 'YOUNG', 'GREEEN'])) /// , ["GREEEN","AIBRH","YOUNG",""]);
 
 // // //+ #224 My Languages
 // // function myLanguages(results) {
