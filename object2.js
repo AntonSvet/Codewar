@@ -1,7 +1,7 @@
-//+ #213 IP Validation
+// //..+ #213 IP Validation
 // function isValidIP(str) {
 //   const newStr = str.split('.')
-//   if (str.includes(' ') || newStr.length !== 4) {
+//   if (newStr.length !== 4) {
 //     return false
 //   }
 //   return newStr.every(
@@ -14,21 +14,65 @@
 // console.log(isValidIP('01.02.03.04')) //, false);
 // console.log(isValidIP(' 1.2.3.4')) //, false);
 
-// // #214 Super power frequency function  ------ Map!!!!
+//+ #214 Super power frequency function  ------ Map!!!! sort!!!!!!!
 // function frequency(arr, options = {}) {
-//   if (arr.length === 0) return arr
-//   let map = new Map()
+//   const map = new Map()
+//   const { criteria = (x) => x, compareTo = (a, b) => (a < b ? -1 : a !== b) } =
+//     options
+//   const groupArr = arr.map(criteria)
+
+//   for (const item of groupArr) {
+//     const prev = map.get(item) || 0
+//     map.set(item, prev + 1)
+//   }
+
+//   return Array.from(map).sort((a, b) => compareTo(a[0], b[0], a[1], b[1]))
 // }
-// console.log(frequency(['Peter', 'Anna', 'Rose', 'Peter', 'Peter', 'Anna'])) //, [["Anna", 2], ["Peter", 3], ["Rose", 1]]);
+// console.log(
+//   frequency(['Peter', 'Anna', 'Rose', 'Peter', 'Peter', 'Anna', 'Qq'], {
+//     criteria: (name) => name.length,
+//   })
+// )
+// // [[5, 3], [4, 3], [2, 1]]
+// console.log(
+//   frequency(['Peter', 'Anna', 'Rose', 'Peter', 'Peter', 'Anna', 'Qq'], {})
+// )
+//, [["Anna", 2], ["Peter", 3], ["Rose", 1], ["Qq", 1]]);
+
 // console.log(frequency([1, 10, 12, 2, 1, 10, 2, 2, 1, 2])) //, [[1, 3], [2, 4], [10, 2], [12, 1]]);
 
-// // #216 From..To..Series #2: from arr1 to arr2. Find the most same sum value of pairs  -----
+// https://github.com/tc39/proposal-upsert#just-update-if-present
+// https://github.com/tc39/proposals
+
+//+ #216 From..To..Series #2: from arr1 to arr2. Find the most same sum value of pairs  -----
 // function findPair(arr1, arr2) {
 //   const newArr = []
 //   for (let i = 0; i < arr1.length; i++) {
-//     newArr.push(arr1[i] + arr2[i])
+//     newArr.push([arr1[i], arr2[i]])
 //   }
-//   console.log(newArr)
+
+//   const summary = newArr.map(([x, y]) => x + y)
+//   console.log(summary)
+//   const obj = {}
+//   for (const num of summary) {
+//     if (!(num in obj)) {
+//       obj[num] = 1
+//     } else {
+//       obj[num]++
+//     }
+//   }
+
+//   const mostFrequency = Math.max(...Object.values(obj))
+//   //console.log('item', mostFrequency)
+//   const mostFrequencyKeys = Object.keys(obj).filter(
+//     (value) => obj[value] === mostFrequency
+//   )
+//   //console.log('key', mostFrequencyKeys)
+
+//   const maxValue = Math.max(...mostFrequencyKeys)
+//   //console.log('maxkey', maxValue)
+
+//   return newArr.filter((x) => x[0] + x[1] === maxValue)
 // }
 
 // console.log(findPair([1, 2, 3, 4, 5], [9, 8, 0, 0, 0])) // , [[1,9],[2,8]])
@@ -88,7 +132,7 @@
 // console.log(runLengthEncoding('abc')) //, [[1,'a'],[1,'b'],[1,'c']]);
 // console.log(runLengthEncoding('aab')) //, [[2,'a'],[1,'b']]);
 
-// // #220  Is a number prime?  -------
+// #220  Is a number prime?  ------- Random tests???
 
 // function isPrime(num) {
 //   if (num < 2) {
@@ -97,7 +141,7 @@
 //   if (num <= 3) {
 //     return true
 //   }
-//   if (num < 2 || num % 2 == 0 || num % 3 == 0) {
+//   if (num % 2 === 0 || num % 3 === 0) {
 //     return false
 //   } else {
 //     return true
@@ -129,22 +173,29 @@
 // console.log(digital_root(16)) //, 7 )
 // console.log(digital_root(456)) //, 6 )
 
-// // #222  Alphabetized  ------------------
+//+ #222  Alphabetized
 
 // function alphabetized(s) {
-//   const a = s.replace(/\s/g, '')
-//   const b = a.split('').sort()
-//   return b.join('')
+//   return s
+//     .replace(/\s/g, '')
+//     .replace(/[^a-zA-Z]/g, '')
+//     .split('')
+//     .sort((a, b) =>
+//       a.toUpperCase() === b.toUpperCase()
+//         ? s.indexOf(a) - s.indexOf(b)
+//         : a.localeCompare(b)
+//     )
+//     .join('')
 // }
 
 // console.log(alphabetized('The Holy Bible')) //, 'BbeehHilloTy')
 
-///№ 223 Sort Strings by Most Contiguous Vowels -------
+//# 223 Sort Strings by Most Contiguous Vowels -------
 
 // function sortStringsByVowels(strings) {
-//   const str = strings.sort()
+//   const vowels = 'aeiouAEIOU '
 
-//   const sortArr = str.sort((a, b) => b.length - a.length)
+//   const sortArr = strings.sort((a, b) => b.length - a.length)
 //   return sortArr
 // }
 
@@ -166,6 +217,56 @@
 // console.log(myLanguages({ Hindi: 60, Greek: 71, Dutch: 93 })) //, ["Dutch", "Greek", "Hindi"])
 // console.log(myLanguages({ 'C++': 50, ASM: 10, Haskell: 20 })) //, [])
 
+// #225 Sports League Table Ranking
+function computeRanks(number, games) {
+  const allGames = []
+  for (const game of games) {
+    let [TeamA, TeamB, GoalA, GoalB] = game
+    let pointA = 0
+    let pointB = 0
+    let GDa = GoalA - GoalB
+    let GDb = GoalB - GoalA
+    if (GoalA > GoalB) {
+      pointA += 2
+    } else if (GoalB > GoalA) {
+      pointB += 2
+    } else {
+      pointA++
+      pointB++
+    }
+    allGames.push([TeamA, pointA, GDa])
+    allGames.push([TeamB, pointB, GDb])
+  }
+
+  const table = []
+
+  for (let i = 0; i < allGames.length; i++) {
+    for (let j = 1; j < allGames.length; j++) {
+      if (allGames[i][0] === allGames[j][0]) {
+        table.push([
+          allGames[i][0],
+          allGames[i][1] + allGames[j][1],
+          allGames[i][2] + allGames[j][2],
+        ])
+      }
+    }
+  }
+  console.log(table)
+}
+
+console.log(
+  computeRanks(6, [
+    [0, 5, 2, 2],
+    [1, 4, 0, 2],
+    [2, 3, 1, 2],
+    [1, 5, 2, 2],
+    [2, 0, 1, 1],
+    [3, 4, 1, 1],
+    [2, 5, 0, 2],
+    [3, 1, 1, 1],
+    [4, 0, 2, 0],
+  ])
+) //[4,4,6,3,1,2]);
 //+ #226 Double Sort
 // function dbSort(a) {
 //   const num = a.filter((item) => typeof item === 'number').sort((a, b) => a - b)
@@ -177,9 +278,9 @@
 // console.log(dbSort(['Banana', 'Orange', 'Apple', 'Mango', 0, 2, 2])) //, [0,2,2,"Apple","Banana","Mango","Orange"]);
 // console.log(dbSort(['C', 'W', 'W', 'W', 1, 2, 0])) //, [0,1,2,"C","W","W","W"]);
 
-// #227 Sorting by bits
+// // #227 Sorting by bits
 // function sortByBit(arr) {
-// your solution here
+
 // }
 
 // //+ #228 Persistent Bugger.
