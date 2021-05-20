@@ -237,18 +237,24 @@ function computeRanks(number, games) {
     allGames.push([TeamA, pointA, GDa])
     allGames.push([TeamB, pointB, GDb])
   }
-
-  const table = []
+  console.log(allGames)
+  const table = {}
 
   for (let i = 0; i < allGames.length; i++) {
     for (let j = 1; j < allGames.length; j++) {
-      if (allGames[i][0] === allGames[j][0]) {
-        table.push([
-          allGames[i][0],
-          allGames[i][1] + allGames[j][1],
-          allGames[i][2] + allGames[j][2],
-        ])
+      if (!(allGames[i][0] in table)) {
+        table[allGames[i][0]] =
+          allGames[
+            (allGames[i][1] + allGames[j][1], allGames[i][2] + allGames[j][2])
+          ]
       }
+      // if (allGames[i][0] === allGames[j][0]) {
+      //   table.push([
+      //     allGames[i][0],
+      //     allGames[i][1] + allGames[j][1],
+      //     allGames[i][2] + allGames[j][2],
+      //   ])
+      // }
     }
   }
   console.log(table)
@@ -310,31 +316,42 @@ console.log(
 
 // // #229  String incrementer
 
-// function incrementString(strng) {
-//   const arr = Array.from(strng)
-//   let num = ''
-//   let str = ''
+function incrementString(strng) {
+  const arr = Array.from(strng)
+  let num = ''
+  let str = ''
+  for (let i = 0; i < arr.length; i++) {
+    if (String(Number(arr[i])) === arr[i]) {
+      num += arr[i]
+    } else {
+      str += arr[i]
+    }
+  }
+
+  const result = str + (num.slice(0, 2) === '00' ? '00' + (+num + 1) : +num + 1)
+  return result
+}
+
+console.log(incrementString('foobar000')) //, "foobar001");
+console.log(incrementString('foo')) //, "foo1");
+console.log(incrementString('foobar001')) //, "foobar002");
+console.log(incrementString('foobar99')) //, "foobar100");
+console.log(incrementString('foobar099')) //, "foobar100");
+console.log(incrementString('')) //, "1");
+
+//+ #230 Maximum subarray sum
+// function maxSequence(arr) {
+//   let res = 0
+
 //   for (let i = 0; i < arr.length; i++) {
-//     if (String(Number(arr[i])) === arr[i]) {
-//       num += arr[i]
-//     } else {
-//       str += arr[i]
+//     let acc = 0
+//     for (let j = i; j < arr.length; j++) {
+//       acc += arr[j]
+//       if (acc > res) {
+//         res = acc
+//       }
 //     }
 //   }
-
-//   const result = str + (Math.abs(num) + 1)
-//   return result
-// }
-
-// console.log(incrementString('foobar000')) //, "foobar001");
-// console.log(incrementString('foo')) //, "foo1");
-// console.log(incrementString('foobar001')) //, "foobar002");
-// console.log(incrementString('foobar99')) //, "foobar100");
-// console.log(incrementString('foobar099')) //, "foobar100");
-// console.log(incrementString('')) //, "1");
-
-// // #230 Maximum subarray sum
-// var maxSequence = function (arr) {
-//
+//   return res
 // }
 // console.log(maxSequence([-2, 1, -3, 4, -1, 2, 1, -5, 4])) //, 6);
