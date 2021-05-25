@@ -45,39 +45,36 @@
 // https://github.com/tc39/proposals
 
 //+ #216 From..To..Series #2: from arr1 to arr2. Find the most same sum value of pairs  -----
-// function findPair(arr1, arr2) {
-//   const newArr = []
-//   for (let i = 0; i < arr1.length; i++) {
-//     newArr.push([arr1[i], arr2[i]])
-//   }
+function findPair(arr1, arr2) {
+  const newArr = []
+  for (let i = 0; i < arr1.length; i++) {
+    newArr.push([arr1[i], arr2[i]])
+  }
 
-//   const summary = newArr.map(([x, y]) => x + y)
-//   console.log(summary)
-//   const obj = {}
-//   for (const num of summary) {
-//     if (!(num in obj)) {
-//       obj[num] = 1
-//     } else {
-//       obj[num]++
-//     }
-//   }
+  const sum = newArr.map(([a, b]) => a + b)
 
-//   const mostFrequency = Math.max(...Object.values(obj))
-//   //console.log('item', mostFrequency)
-//   const mostFrequencyKeys = Object.keys(obj).filter(
-//     (value) => obj[value] === mostFrequency
-//   )
-//   //console.log('key', mostFrequencyKeys)
+  const obj = {}
+  for (const num of sum) {
+    if (!(num in obj)) {
+      obj[num] = 1
+    } else {
+      obj[num]++
+    }
+  }
 
-//   const maxValue = Math.max(...mostFrequencyKeys)
-//   //console.log('maxkey', maxValue)
+  const values = Math.max(...Object.values(obj))
 
-//   return newArr.filter((x) => x[0] + x[1] === maxValue)
-// }
+  const keys = Object.keys(obj).filter((value) => obj[value] === values)
 
-// console.log(findPair([1, 2, 3, 4, 5], [9, 8, 0, 0, 0])) // , [[1,9],[2,8]])
-// console.log(findPair([1, 2, 3, 4, 5], [0, 0, 0, 0, 0])) // , [])
-// console.log(findPair([1, 2, 3, 4, 5], [5, 4, 3, 2, 1])) // , [[1,5],[2,4],[3,3],[4,2],[5,1]])
+  const maxValue = Math.max(...keys)
+  const result = newArr.filter((x) => x[0] + x[1] === maxValue)
+
+  return result.length >= 2 ? result : []
+}
+
+console.log(findPair([1, 2, 3, 4, 5], [9, 8, 0, 0, 0])) // , [[1,9],[2,8]])
+console.log(findPair([1, 2, 3, 4, 5], [0, 0, 0, 0, 0])) // , [])
+console.log(findPair([1, 2, 3, 4, 5], [5, 4, 3, 2, 1])) // , [[1,5],[2,4],[3,3],[4,2],[5,1]])
 
 //+ #217  Evaluating prefix Polish notation
 
@@ -193,7 +190,7 @@
 //# 223 Sort Strings by Most Contiguous Vowels -------
 
 // function sortStringsByVowels(strings) {
-//   const vowels = 'aeiouAEIOU '
+//
 
 //   const sortArr = strings.sort((a, b) => b.length - a.length)
 //   return sortArr
