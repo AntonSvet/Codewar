@@ -121,31 +121,31 @@
 
 //+ #229  String incrementer
 
-function incrementString(strng) {
-  const arr = Array.from(strng)
-  let num = ''
-  let str = ''
-  for (let i = 0; i < arr.length; i++) {
-    if (String(Number(arr[i])) === arr[i]) {
-      num += arr[i]
-    } else {
-      str += arr[i]
-    }
-  }
+// function incrementString(strng) {
+//   const arr = Array.from(strng)
+//   let num = ''
+//   let str = ''
+//   for (let i = 0; i < arr.length; i++) {
+//     if (String(Number(arr[i])) === arr[i]) {
+//       num += arr[i]
+//     } else {
+//       str += arr[i]
+//     }
+//   }
 
-  const zero = num.length - (String((+num + 1)).length)
+//   const zero = num.length - (String((+num + 1)).length)
 
-  return str + (num.slice(0, 2) === '00' ? '0'.repeat(zero) + (+num + 1) : +num + 1)
-}
-//foobar00999
-//result foobar001000
-console.log(incrementString('foobar00999')) //, "foobar01000");
-console.log(incrementString('foobar000')) //, "foobar001");
-console.log(incrementString('foo')) //, "foo1");
-console.log(incrementString('foobar001')) //, "foobar002");
-console.log(incrementString('foobar99')) //, "foobar100");
-console.log(incrementString('foobar099')) //, "foobar100");
-console.log(incrementString('')) //, "1");
+//   return str + (num.slice(0, 2) === '00' ? '0'.repeat(zero) + (+num + 1) : +num + 1)
+// }
+// //foobar00999
+// //result foobar001000
+// console.log(incrementString('foobar00999')) //, "foobar01000");
+// console.log(incrementString('foobar000')) //, "foobar001");
+// console.log(incrementString('foo')) //, "foo1");
+// console.log(incrementString('foobar001')) //, "foobar002");
+// console.log(incrementString('foobar99')) //, "foobar100");
+// console.log(incrementString('foobar099')) //, "foobar100");
+// console.log(incrementString('')) //, "1");
 
 //+ #230 Maximum subarray sum
 // function maxSequence(arr) {
