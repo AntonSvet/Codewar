@@ -185,26 +185,26 @@ function computeRanks(number, games) {
   }
   console.log(allGames)
   const table = {}
-
-  for (let i = 0; i < allGames.length; i++) {
-    for (let j = 1; j < allGames.length; j++) {
-      if (!(allGames[i][0] in table)) {
-        table[allGames[i][0]] =
-          allGames[
-          (allGames[i][1] + allGames[j][1], allGames[i][2] + allGames[j][2])
-          ]
-      }
-      // if (allGames[i][0] === allGames[j][0]) {
-      //   table.push([
-      //     allGames[i][0],
-      //     allGames[i][1] + allGames[j][1],
-      //     allGames[i][2] + allGames[j][2],
-      //   ])
-      // }
+  allGames.forEach((item, idx) => {
+    if (!(item[0] in table)) {
+      table[item[0]] = [[item[1], item[2]]]
+    } else {
+      table[item[0]].push([item[1], item[2]])
     }
-  }
+  })
+
   console.log(table)
+  console.log(table[0])
+  for (const key in table) {
+    console.log(table[key])
+
+  }
 }
+
+
+
+
+
 
 console.log(
   computeRanks(6, [
