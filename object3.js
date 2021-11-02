@@ -220,22 +220,38 @@ function computeRanks(number, games) {
     teams[TeamA].goals += GoalA
     teams[TeamB].points += pointB
     teams[TeamB].diff += GDb
-    teams[TeamB].goals += GoalA
+    teams[TeamB].goals += GoalB
 
 
 
   }
-  console.log(teams)
-  teams = teams.sort((a, b) => b[0] - a[0] || b[1] - a[1] || b[2] - a[2])
-  let res = []
-  res[teams[0][3]] = 1
-  for (let i = 1; i < teams.length; i++) {
-    res[teams[i][3]] = i + 1
-    if (teams[i - 1][0] == teams[i][0] && teams[i - 1][1] == teams[i][1] && teams[i - 1][2] == teams[i][2]) {
-      res[teams[i][3]] = res[teams[i - 1][3]]
+  teams.sort((a, b) => {
+    if (a.points !== b.points) {
+      return a.points > b.points ? -1 : 1
     }
+    if (a.diff !== b.diff) {
+      return a.diff > b.diff ? -1 : 1
+    }
+
+    return a.goals > b.goals ? -1 : 1
+
+
+  })
+  console.log(teams)
+
+
+  for (let i = 0; i < teams.length; i++) {
+    teams[i].rang = i + 1;
   }
-  return res
+
+  for (let i = 0; i < teams.length - 1; i++)
+    for (j = i + 1; j < teams.length; j++)
+      if (teams[i].points === teams[j].points && teams[i].diff === teams[j].diff && teams[i].goals === teams[j].goals) {
+        teams[j].rang = teams[i].rang;
+      }
+  return teams.sort((a, b) => a.team < b.team ? -1 : 1).map(item => item.rang);
+
+
 }
 
 
